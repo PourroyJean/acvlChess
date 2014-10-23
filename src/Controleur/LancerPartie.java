@@ -17,6 +17,7 @@ public class LancerPartie {
 
 
 
+
         //Ajouter joueur au singleotn jeu
 
         //Creation echiquier
