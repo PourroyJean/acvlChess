@@ -30,4 +30,3 @@ public class Coordonnee {
         this.y = y;
     }
 }
-
