@@ -13,7 +13,7 @@ public class Echiquier {
     public Echiquier(Piece[][] tableau) {
         this.tableau = tableau;
     }
-    
+
     /* Recupère une pièce de l'échiquier */
     public Piece get(int x, int y) {
         return this.tableau[x][y];
