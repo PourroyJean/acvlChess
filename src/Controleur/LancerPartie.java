@@ -5,7 +5,7 @@ import Modèle.*;
 /**
  * Created by perrettc on 23/10/14.
  */
-public class Lancer_partie {
+public class LancerPartie {
     public static void lancement_partie(){
 
         //Création des 2 joueurs
@@ -13,7 +13,9 @@ public class Lancer_partie {
         Joueur noir    = new Joueur();
 
 
+        //Ajouter joueur au singleotn jeu
 
+        //Creation echiquier
         Piece[][] tableau = new Piece[8][8];
         // BLANCS - Reine/Roi
         tableau[3][0] =  new Reine(blanc, new Coordonnee(3,0));
@@ -48,7 +50,7 @@ public class Lancer_partie {
         }
 
         echiquier = new Echiquier(tableau);
-
+        //TODO setechiquier(tab)
 
 
     }
