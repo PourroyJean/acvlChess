@@ -3,5 +3,5 @@ package Controleur;
 /**
  * Created by perrettc on 23/10/14.
  */
-public class Deplacer_pièce {
+public class Deplacer_piece {
 }
