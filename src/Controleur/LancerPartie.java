@@ -9,8 +9,8 @@ public class LancerPartie {
     public static void lancement_partie(){
 
         //Création des 2 joueurs
-        Joueur blanc   = new Joueur();
-        Joueur noir    = new Joueur();
+        Joueur blanc   = new Joueur("blanc",null);
+        Joueur noir    = new Joueur("noir",null);
         //Ajout des joueurs au singleton
         Jeu.instance().setJoueurBlanc(blanc);
         Jeu.instance().setJoueurNoir(noir);
