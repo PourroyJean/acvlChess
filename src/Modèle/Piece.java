@@ -16,4 +16,8 @@ public abstract class Piece {
     public Coordonnee getCoordonne() {
         return coordonne;
     }
+
+    public void deplacer(int x, int y) {
+        coordonne.set(x, y);
+    }
 }

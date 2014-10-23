@@ -12,7 +12,6 @@ public class Echiquier {
 
     public void add(Piece p)
     {
-        tableau[p.getCoordonne()][]
     }
 
     public Piece[][] getTableau() {
