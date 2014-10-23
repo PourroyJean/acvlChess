@@ -16,4 +16,12 @@ public class Coordonnee {
     public String toString() {
         return position_letters[x]+""+y;
     }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
 }
