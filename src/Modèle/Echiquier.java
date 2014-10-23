@@ -6,12 +6,13 @@ package Modèle;
 public class Echiquier {
     private Piece[][] tableau;
 
-    public Echiquier() {
-
+    public Echiquier(int taille) {
+        tableau = new Piece[taille][taille];
     }
 
-    public Echiquier(Piece[][] tableau) {
-        this.tableau = tableau;
+    public void add(Piece p)
+    {
+        tableau[p.getCoordonne()][]
     }
 
     public Piece[][] getTableau() {
