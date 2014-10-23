@@ -21,3 +21,4 @@ public abstract class Piece {
         coordonne.set(x, y);
     }
 }
+
