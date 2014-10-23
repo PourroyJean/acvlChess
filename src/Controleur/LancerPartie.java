@@ -11,6 +11,9 @@ public class LancerPartie {
         //Création des 2 joueurs
         Joueur blanc   = new Joueur();
         Joueur noir    = new Joueur();
+        //Ajout des joueurs au singleton
+        Jeu.instance().setJoueurBlanc(blanc);
+        Jeu.instance().setJoueurNoir(noir);
 
 
         //Ajouter joueur au singleotn jeu
@@ -49,7 +52,7 @@ public class LancerPartie {
             tableau[i][6] = new Pion(noir, new Coordonnee(i, 6));
         }
 
-        echiquier = new Echiquier(tableau);
+        //echiquier = new Echiquier(tableau);
         //TODO setechiquier(tab)
 
 
