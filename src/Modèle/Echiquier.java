@@ -1,29 +1,3 @@
-<<<<<<< HEAD
-package Modèle;
-
-/**
- * Created by Paul on 20/10/2014.
- */
-public class Echiquier {
-    private Piece[][] tableau;
-
-    public Echiquier(int taille) {
-        tableau = new Piece[taille][taille];
-    }
-
-    public void add(Piece p)
-    {
-    }
-
-    public Piece[][] getTableau() {
-        return tableau;
-    }
-
-    public Piece get(int x, int y) {
-        return this.tableau[x][y];
-    }
-}
-=======
 package Modèle;
 
 /**
@@ -62,4 +36,3 @@ public class Echiquier {
         this.remove(p.getCoordonne().getX(), p.getCoordonne().getY());
     }
 }
->>>>>>> cd70f2e3c6831c53254bbffc3cfd37580ae2a80c
