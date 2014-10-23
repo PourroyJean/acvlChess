@@ -13,4 +13,12 @@ public class Echiquier {
     public Echiquier(Piece[][] tableau) {
         this.tableau = tableau;
     }
+
+    public Piece[][] getTableau() {
+        return tableau;
+    }
+
+    public Piece get(int x, int y) {
+        return this.tableau[x][y];
+    }
 }

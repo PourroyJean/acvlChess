@@ -15,6 +15,7 @@ public class Jeu {
         blanc   = new Joueur();
         noir    = new Joueur();
 
+
         Piece[][] tableau = new Piece[8][8];
         // BLANCS - Reine/Roi
         tableau[3][0] =  new Reine	(blanc, new Coordonnee(3,0));

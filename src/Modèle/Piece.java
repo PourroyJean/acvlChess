@@ -12,4 +12,8 @@ public abstract class Piece {
         maitre = m;
         coordonne = c;
     }
+
+    public Coordonnee getCoordonne() {
+        return coordonne;
+    }
 }

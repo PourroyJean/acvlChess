@@ -14,6 +14,6 @@ public class Coordonnee {
     }
 
     public String toString() {
-        return position_letters[x-1]+""+y;
+        return position_letters[x]+""+y;
     }
 }
