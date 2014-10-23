@@ -16,6 +16,7 @@ public class LancerPartie {
         Jeu.instance().setJoueurNoir(noir);
 
 
+
         //Ajouter joueur au singleotn jeu
 
         //Creation echiquier
