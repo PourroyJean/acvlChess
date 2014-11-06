@@ -1,6 +1,7 @@
 package Controleur;
 
 import Modèle.*;
+import Modèle.Pièce.*;
 
 /**
  * Created by perrettc on 23/10/14.
@@ -9,14 +10,16 @@ public class LancerPartie {
     public static void lancement_partie(){
 
         //Création des 2 joueurs
-        Joueur blanc   = new Joueur("blanc",null);
-        Joueur noir    = new Joueur("noir",null);
+        Joueur jblanc   = new Joueur();
+        Joueur jnoir    = new Joueur();
         //Ajout des joueurs au singleton
-        Jeu.instance().setJoueurBlanc(blanc);
-        Jeu.instance().setJoueurNoir(noir);
+        Jeu.instance().setJoueurBlanc(jblanc);
+        Jeu.instance().setJoueurNoir(jnoir);
 
 
-
+        // Just a trick not to rewrite the code when "blanc" became a boolean
+        boolean blanc = true;
+        boolean noir = false;
 
         //Ajouter joueur au singleotn jeu
 
@@ -32,7 +35,7 @@ public class LancerPartie {
         tableau[6][0] =  new Cavalier(blanc, new Coordonnee(6,0));
         tableau[1][0] =  new Cavalier(blanc, new Coordonnee(1,0));
         //tours
-        tableau[0][0] =  new Tour	(blanc, new Coordonnee(0,0));
+        tableau[0][0] =  new Tour(blanc, new Coordonnee(0,0));
         tableau[7][0] =  new Tour	(blanc, new Coordonnee(7,0));
 
         // NOIRS - Reine/Roi

@@ -1,12 +1,15 @@
 package Modèle;
 
+import Erreur.NotYetImplementedException;
+import Modèle.Pièce.Piece;
+
 /**
  * Created by Paul on 19/10/2014.
  */
 
 // Singleton jeu
 public class Jeu {
-    private Echiquier echiquier;
+    private Piece[][] echiquier;
     private Joueur blanc;
     private Joueur noir;
     final private static Jeu jeu = new Jeu();
@@ -26,7 +29,7 @@ public class Jeu {
         return noir;
     }
 
-    public Echiquier getEchiquier() {
+    public Piece[][] getEchiquier() {
         return echiquier;
     }
 
@@ -36,6 +39,10 @@ public class Jeu {
 
     public void setJoueurNoir(Joueur j) {
         this.noir = j;
+    }
+
+    public void init() throws NotYetImplementedException {
+        throw new NotYetImplementedException();
     }
 
 }

@@ -4,18 +4,13 @@ package Modèle;
  * Created by Paul on 19/10/2014.
  */
 public class Joueur {
-    String couleur = "";
-    Piece  roi = null;
+    String nom;
 
-    public Joueur(String couleur, Piece roi) {
-        this.couleur = couleur;
-        this.roi = roi;
+    public Joueur(String nom) {
+        this.nom = nom;
     }
 
-    @Override
-    public String toString() {
-        return "Joueur{" +
-                "couleur='" + couleur + '\'' +
-                '}';
+    public Joueur() {
+        this.nom = "";
     }
 }
