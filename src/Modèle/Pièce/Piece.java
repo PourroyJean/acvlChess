@@ -33,6 +33,6 @@ public abstract class Piece {
         this.coordonnee = coordonnee;
     }
 
-    abstract public void appliquer(Visiteur v);
+    abstract public void applique(Visiteur v);
 }
 

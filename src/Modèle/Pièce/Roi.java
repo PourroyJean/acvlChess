@@ -13,7 +13,7 @@ public class Roi extends Piece {
     }
 
     @Override
-    public void appliquer(Visiteur v) {
+    public void applique(Visiteur v) {
         try {
             v.visite(this);
         } catch (NotYetImplementedException e) {
