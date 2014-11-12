@@ -1,7 +1,5 @@
 package Controleur;
 
-import Modèle.Jeu;
-
 /**
  * Created by Paul on 06/11/2014.
  */

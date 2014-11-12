@@ -1,8 +1,5 @@
 package Controleur;
 
-import Modèle.*;
-import Modèle.Pièce.*;
-
 /**
  * Created by perrettc on 23/10/14.
  */

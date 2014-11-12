@@ -1,7 +1,7 @@
-package Modèle;
+package Modele;
 
 import Erreur.NotYetImplementedException;
-import Modèle.Pièce.*;
+import Modele.Piece.*;
 
 /**
  * Created by Paul on 19/10/2014.
@@ -25,7 +25,10 @@ public class Jeu {
     }
 
     public  boolean verificationEchec (){
-            return verifLigne() && verifDiagonale() && verifCavalier();
+        return verifLigne(this.echiquier) && verifDiagonale(this.echiquier) && verifCavalier(this.echiquier);
+    }
+    public  boolean verificationEchec (Piece[][] echiquier){
+            return verifLigne(echiquier) && verifDiagonale(echiquier) && verifCavalier(echiquier);
     }
 
     public boolean verifCase (int x, int y){
@@ -35,10 +38,10 @@ public class Jeu {
         return true;
     }
 
-    public boolean verifLigne(){
+    public boolean verifLigne(Piece[][] echiquier){
         Piece p = null;
-        int xRoi = (BLANC) ? roiBlanc.getCoordonnee().getX() : roiNoir.getCoordonnee().getX();
-        int yRoi = ((BLANC) ? roiBlanc.getCoordonnee().getY() : roiNoir.getCoordonnee().getY());
+        int xRoi = (BLANC) ? roiBlanc.getCoordonnees().getX() : roiNoir.getCoordonnees().getX();
+        int yRoi = ((BLANC) ? roiBlanc.getCoordonnees().getY() : roiNoir.getCoordonnees().getY());
 
         //Vers le haut
         int x = xRoi;
@@ -109,10 +112,10 @@ public class Jeu {
         return true;
     }
 
-    private boolean verifCavalier() {
+    private boolean verifCavalier(Piece[][] echiquier) {
         Piece p = null;
-        int x = (BLANC) ? roiBlanc.getCoordonnee().getX() : roiNoir.getCoordonnee().getX();
-        int y = ((BLANC) ? roiBlanc.getCoordonnee().getY() : roiNoir.getCoordonnee().getY());
+        int x = (BLANC) ? roiBlanc.getCoordonnees().getX() : roiNoir.getCoordonnees().getX();
+        int y = ((BLANC) ? roiBlanc.getCoordonnees().getY() : roiNoir.getCoordonnees().getY());
 
         //la case existe + c'est un cavalier  + couleur adverse
 
@@ -144,10 +147,10 @@ public class Jeu {
         return true;
     }
 
-    private boolean verifDiagonale() {
+    private boolean verifDiagonale(Piece[][] echiquier) {
         Piece p = null;
-        int xRoi = (BLANC) ? roiBlanc.getCoordonnee().getX() : roiNoir.getCoordonnee().getX();
-        int yRoi = ((BLANC) ? roiBlanc.getCoordonnee().getY() : roiNoir.getCoordonnee().getY());
+        int xRoi = (BLANC) ? roiBlanc.getCoordonnees().getX() : roiNoir.getCoordonnees().getX();
+        int yRoi = ((BLANC) ? roiBlanc.getCoordonnees().getY() : roiNoir.getCoordonnees().getY());
 
         //Vers le haut-droit
         int x = xRoi + 1;
@@ -231,7 +234,7 @@ public class Jeu {
     }
 
 
-    public Piece getPiece(Coordonnee c){
+    public Piece getPiece(Coordonnees c){
         return echiquier[c.getX()][c.getY()];
     }
 
@@ -254,38 +257,41 @@ public class Jeu {
         //Creation echiquier
         echiquier = new Piece[8][8];
         // BLANCS - Reine/Roi
-        echiquier[3][0] =  new Reine(BLANC, new Coordonnee(3,0));
-        roiBlanc = new Roi(BLANC, new Coordonnee(4,0));
+        echiquier[3][0] =  new Reine(BLANC, new Coordonnees(3,0));
+        roiBlanc = new Roi(BLANC, new Coordonnees(4,0));
         echiquier[4][0] =  roiBlanc;
         //fous
-        echiquier[5][0] =  new Fou(BLANC, new Coordonnee(5,0));
-        echiquier[2][0] =  new Fou(BLANC, new Coordonnee(2,0));
+        echiquier[5][0] =  new Fou(BLANC, new Coordonnees(5,0));
+        echiquier[2][0] =  new Fou(BLANC, new Coordonnees(2,0));
         //cavaliers
-        echiquier[6][0] =  new Cavalier(BLANC, new Coordonnee(6,0));
-        echiquier[1][0] =  new Cavalier(BLANC, new Coordonnee(1,0));
+        echiquier[6][0] =  new Cavalier(BLANC, new Coordonnees(6,0));
+        echiquier[1][0] =  new Cavalier(BLANC, new Coordonnees(1,0));
         //tours
-        echiquier[0][0] =  new Tour(BLANC, new Coordonnee(0,0));
-        echiquier[7][0] =  new Tour	(BLANC, new Coordonnee(7,0));
+        echiquier[0][0] =  new Tour(BLANC, new Coordonnees(0,0));
+        echiquier[7][0] =  new Tour	(BLANC, new Coordonnees(7,0));
 
         // NOIRS - Reine/Roi
-        echiquier[3][7] =  new Reine	(NOIR, new Coordonnee(3,0));
-        roiNoir = new Roi (NOIR, new Coordonnee(4,0));
+        echiquier[3][7] =  new Reine	(NOIR, new Coordonnees(3,0));
+        roiNoir = new Roi (NOIR, new Coordonnees(4,0));
         echiquier[4][7] =  roiNoir;
         //fous
-        echiquier[5][7] =  new Fou(NOIR, new Coordonnee(5,0));
-        echiquier[2][7] =  new Fou(NOIR, new Coordonnee(2,0));
+        echiquier[5][7] =  new Fou(NOIR, new Coordonnees(5,0));
+        echiquier[2][7] =  new Fou(NOIR, new Coordonnees(2,0));
         //cavaliers
-        echiquier[6][7] =  new Cavalier(NOIR, new Coordonnee(6,0));
-        echiquier[1][7] =  new Cavalier(NOIR, new Coordonnee(1,0));
+        echiquier[6][7] =  new Cavalier(NOIR, new Coordonnees(6,0));
+        echiquier[1][7] =  new Cavalier(NOIR, new Coordonnees(1,0));
         //tours
-        echiquier[0][7] =  new Tour	(NOIR, new Coordonnee(0,0));
-        echiquier[7][7] =  new Tour	(NOIR, new Coordonnee(7,0));
+        echiquier[0][7] =  new Tour	(NOIR, new Coordonnees(0,0));
+        echiquier[7][7] =  new Tour	(NOIR, new Coordonnees(7,0));
 
         //PIONS
         for(int i=0; i<8; i++) {
-            echiquier[i][1] = new Pion(BLANC, new Coordonnee(i, 1));
-            echiquier[i][6] = new Pion(NOIR, new Coordonnee(i, 6));
+            echiquier[i][1] = new Pion(BLANC, new Coordonnees(i, 1));
+            echiquier[i][6] = new Pion(NOIR, new Coordonnees(i, 6));
         }
     }
 
+    public void setEchiquier(Piece[][] echiquier) {
+        this.echiquier = echiquier;
+    }
 }

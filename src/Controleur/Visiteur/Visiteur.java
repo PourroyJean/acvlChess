@@ -2,7 +2,7 @@ package Controleur.Visiteur;
 
 import Erreur.DeplacementImpossible;
 import Erreur.NotYetImplementedException;
-import Modèle.Pièce.*;
+import Modele.Piece.*;
 
 /**
  * Created by Paul on 06/11/2014.

@@ -1,15 +1,14 @@
-package Modèle.Pièce;
+package Modele.Piece;
 
 import Controleur.Visiteur.Visiteur;
 import Erreur.NotYetImplementedException;
-import Modèle.Coordonnee;
-import Modèle.Joueur;
+import Modele.Coordonnees;
 
 /**
  * Created by Paul on 16/10/2014.
  */
-public class Cavalier extends Piece {
-    public Cavalier(boolean b, Coordonnee c) {
+public class Tour extends Piece {
+    public Tour(boolean b, Coordonnees c) {
         super(b, c);
     }
 
