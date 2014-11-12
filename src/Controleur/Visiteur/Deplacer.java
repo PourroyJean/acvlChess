@@ -39,8 +39,30 @@ public class Deplacer implements Visiteur {
     }
 
     @Override
-    public void visite(Fou fou) throws NotYetImplementedException {
-        throw new NotYetImplementedException();
+    public void visite(Fou fou) throws NotYetImplementedException, DeplacementImpossible {
+        //on verifit que le deplacement est bien en diagonnal
+        if(Math.abs(nouvelleCoordonnees.getX()-fou.getCoordonnees().getX()) != Math.abs(nouvelleCoordonnees.getY()-fou.getCoordonnees().getY()))
+            throw new DeplacementImpossible("Ceci n'est pas un déplacement autorisé pour le fou");
+
+        //on verifit qu'il n'y a pas un de nos pion sur la case cible
+        if (Jeu.instance().getPiece(nouvelleCoordonnees) != null && Jeu.instance().getPiece(nouvelleCoordonnees).isBlanc() == fou.isBlanc())
+            throw new DeplacementImpossible("Une de nos pièce est sur la case cible");
+
+        //on verifit qu'il n'y a rien sur le chemin du deplacement
+        if(! ligneLibre(fou.getCoordonnees(), nouvelleCoordonnees))
+            throw new DeplacementImpossible("Il y a un pion sur les cases intermediaires");
+
+        //le déplacement est possible en theorie
+        DeplacementPiece(fou, nouvelleCoordonnees);
+
+        //on met a jour le tour
+        Jeu.instance().tourSuivant();
+
+        //on lance la verification pour voir si on met en echeque l'adversaire
+        miseEnEcheque = Jeu.instance().verificationEchec();
+
+        //on met à jour la vue
+
     }
 
     @Override
@@ -61,9 +83,21 @@ public class Deplacer implements Visiteur {
             if(! ligneLibre(tour.getCoordonnees(), nouvelleCoordonnees))
                 throw new DeplacementImpossible("Il y a un pion sur les cases intermediaires");
 
-            //on verifit quelle ne sont pas controlé
+            //on verifit quelle ne sont pas controlées
+
+            //le déplacement est possible en theorie
 
 
+            //on met a jour le tour
+            Jeu.instance().tourSuivant();
+
+            //on lance la verification pour voir si on met en echeque l'adversaire
+            miseEnEcheque = Jeu.instance().verificationEchec();
+
+            //on met à jour la vue
+
+            //fin de la fonction
+            return;
         }
 
         //on verifit qu'il n'y a pas un de nos pion sur la case cible
@@ -75,26 +109,7 @@ public class Deplacer implements Visiteur {
             throw new DeplacementImpossible("Il y a un pion sur les cases intermediaires");
 
         //le déplacement est possible en theorie
-
-        //on creer une copie de l'echiquier pour verifier si c'est possible de faire le deplacement
-        Piece[][] tmpEchiquier = Jeu.instance().getEchiquier().clone();
-
-        //on sauvegarde les coordonnées
-        Coordonnees ancienne = tour.getCoordonnees();
-
-        //on modifit les coordonnées
-        tour.setCoordonnees(nouvelleCoordonnees);
-        tmpEchiquier[tour.getCoordonnees().getX()][tour.getCoordonnees().getY()] = tour;
-
-        //on verifit que le verif echec fonctionne
-        //si il ne fonctionne pas on remet les ancienne coordonner dans la piece et on leve une exception
-        if(!Jeu.instance().verificationEchec(tmpEchiquier)){
-            tour.setCoordonnees(ancienne);
-            throw new DeplacementImpossible("Vous vous mettez en echec");
-        }
-
-        //dans le cas ou tout va bien on garde le nouvelle echiqier
-        Jeu.instance().setEchiquier(tmpEchiquier);
+        DeplacementPiece(tour, nouvelleCoordonnees);
 
         //on met a jour le tour
         Jeu.instance().tourSuivant();
@@ -114,12 +129,37 @@ public class Deplacer implements Visiteur {
     }
 
     @Override
-    public void visite(Reine reine) throws NotYetImplementedException {
-        throw new NotYetImplementedException();
+    public void visite(Reine reine) throws NotYetImplementedException, DeplacementImpossible {
+        //on verifit que le deplacement est bien en diagonnal ou en ligne
+        if(Math.abs(nouvelleCoordonnees.getX()-reine.getCoordonnees().getX()) == Math.abs(nouvelleCoordonnees.getY()-reine.getCoordonnees().getY())
+                && (nouvelleCoordonnees.getX() != reine.getCoordonnees().getX() && nouvelleCoordonnees.getY() != reine.getCoordonnees().getY()) )
+            throw new DeplacementImpossible("Ceci n'est pas un déplacement autorisé pour la reine");
+
+        //on verifit qu'il n'y a pas un de nos pion sur la case cible
+        if (Jeu.instance().getPiece(nouvelleCoordonnees) != null && Jeu.instance().getPiece(nouvelleCoordonnees).isBlanc() == reine.isBlanc())
+            throw new DeplacementImpossible("Une de nos pièce est sur la case cible");
+
+        //on verifit qu'il n'y a rien sur le chemin du deplacement
+        if(! ligneLibre(reine.getCoordonnees(), nouvelleCoordonnees))
+            throw new DeplacementImpossible("Il y a un pion sur les cases intermediaires");
+
+        //le déplacement est possible en theorie
+        DeplacementPiece(reine, nouvelleCoordonnees);
+
+        //on met a jour le tour
+        Jeu.instance().tourSuivant();
+
+        //on lance la verification pour voir si on met en echeque l'adversaire
+        miseEnEcheque = Jeu.instance().verificationEchec();
+
+        //on met à jour la vue
+
+
+
+
     }
 
-    private boolean ligneLibre(Coordonnees c1, Coordonnees c2)
-    {
+    private boolean ligneLibre(Coordonnees c1, Coordonnees c2){
 
         //3 cas :
         //sur la meme ligne
@@ -207,5 +247,28 @@ public class Deplacer implements Visiteur {
 
         return true;
 
+    }
+
+    private void DeplacementPiece(Piece p, Coordonnees nc) throws DeplacementImpossible {
+        //on creer une copie de l'echiquier pour verifier si c'est possible de faire le deplacement
+        Piece[][] tmpEchiquier = Jeu.instance().getEchiquier().clone();
+
+        //on sauvegarde les coordonnées
+        Coordonnees ancienne = p.getCoordonnees();
+
+        //on modifit les coordonnées
+        p.setCoordonnees(nouvelleCoordonnees);
+        tmpEchiquier[p.getCoordonnees().getX()][p.getCoordonnees().getY()] = p;
+
+        //on verifit que le verif echec fonctionne
+        //si il ne fonctionne pas on remet les ancienne coordonner dans la piece et on leve une exception
+        if(!Jeu.instance().verificationEchec(tmpEchiquier)){
+            p.setCoordonnees(ancienne);
+            throw new DeplacementImpossible("Vous vous mettez en echec");
+        }
+
+        p.setDejaDeplace(true);
+        //dans le cas ou tout va bien on garde le nouvelle echiqier
+        Jeu.instance().setEchiquier(tmpEchiquier);
     }
 }
