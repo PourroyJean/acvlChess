@@ -52,5 +52,10 @@ public abstract class Piece {
     }
 
     abstract public void applique(Visiteur v) throws DeplacementImpossible;
+
+    @Override
+    public String toString() {
+        return getClass().getName();
+    }
 }
 

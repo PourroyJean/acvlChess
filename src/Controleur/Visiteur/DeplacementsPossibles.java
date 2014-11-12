@@ -1,13 +1,21 @@
 package Controleur.Visiteur;
 
 import Erreur.NotYetImplementedException;
+import Modele.Coordonnees;
 import Modele.Piece.*;
+
+import java.util.Vector;
 
 /**
  * Created by Paul on 06/11/2014.
  */
 public class DeplacementsPossibles implements  Visiteur{
-    public DeplacementsPossibles(){}
+    Vector<Coordonnees> deplacements;
+
+    public DeplacementsPossibles() {
+        this.deplacements = new Vector<Coordonnees>();
+    }
+
     @Override
     public void visite(Pion pion) throws NotYetImplementedException {
         throw new NotYetImplementedException();
@@ -25,10 +33,7 @@ public class DeplacementsPossibles implements  Visiteur{
 
     @Override
     public void visite(Tour tour) throws NotYetImplementedException {
-
-        //En haut
-        //for
-
+        throw new NotYetImplementedException();
     }
 
     @Override

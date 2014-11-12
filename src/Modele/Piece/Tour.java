@@ -15,11 +15,13 @@ public class Tour extends Piece {
     }
 
     @Override
-    public void applique(Visiteur v) throws DeplacementImpossible {
+    public void applique(Visiteur v) {
         try {
             v.visite(this);
         } catch (NotYetImplementedException e) {
             e.printStackTrace();
+        } catch (DeplacementImpossible deplacementImpossible) {
+            deplacementImpossible.printStackTrace();
         }
     }
 }

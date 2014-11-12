@@ -1,6 +1,7 @@
 package Modele.Piece;
 
 import Controleur.Visiteur.Visiteur;
+import Erreur.DeplacementImpossible;
 import Erreur.NotYetImplementedException;
 import Modele.Coordonnees;
 import Modele.CouleurJoueur;
@@ -20,6 +21,8 @@ public class Reine extends Piece {
             v.visite(this);
         } catch (NotYetImplementedException e) {
             e.printStackTrace();
+        } catch (DeplacementImpossible deplacementImpossible) {
+            deplacementImpossible.printStackTrace();
         }
     }
 }
