@@ -238,6 +238,10 @@ public class Jeu {
         return echiquier[c.getX()][c.getY()];
     }
 
+    public void setPiece(Piece p){
+        echiquier[p.getCoordonnees().getX()][p.getCoordonnees().getY()] = p;
+    }
+
 
     public static Jeu instance() {
         return jeu;
