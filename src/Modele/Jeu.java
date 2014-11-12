@@ -31,7 +31,7 @@ public class Jeu {
             return verifLigne(echiquier) && verifDiagonale(echiquier) && verifCavalier(echiquier);
     }
 
-    public boolean verifCase (int x, int y){
+    public static boolean verifCase(int x, int y){
         if(x > 7 || y > 7 || x < 0 || y < 0){
             return false;
         }
