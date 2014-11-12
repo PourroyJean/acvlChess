@@ -25,7 +25,10 @@ public class DeplacementsPossibles implements  Visiteur{
 
     @Override
     public void visite(Tour tour) throws NotYetImplementedException {
-        throw new NotYetImplementedException();
+
+        //En haut
+        //for
+
     }
 
     @Override

@@ -20,7 +20,7 @@ public class Deplacer implements Visiteur {
 
     public Deplacer(Coordonnees nouvellePosition) throws HorsDeLechiquier {
         //verification que la nouvelle coordonnée est sur l'echiquier
-        if (!Jeu.instance().verifCase(nouvellePosition.getX(), nouvellePosition.getY()))
+        if (!Jeu.verifCase(nouvellePosition.getX(), nouvellePosition.getY()))
             throw new HorsDeLechiquier();
 
         nouvelleCoordonnees = nouvellePosition;
