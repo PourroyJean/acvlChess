@@ -13,8 +13,18 @@ public class Jeu {
     private Piece[][] echiquier;
     private Joueur jBlanc;
     private Joueur jNoir;
-    private Piece roiBlanc;
-    private Piece roiNoir;
+
+    public Roi getRoiBlanc() {
+        return roiBlanc;
+    }
+
+    private Roi roiBlanc;
+
+    public Roi getRoiNoir() {
+        return roiNoir;
+    }
+
+    private Roi roiNoir;
 
 
     public void tourSuivant()

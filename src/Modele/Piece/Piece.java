@@ -21,6 +21,16 @@ public abstract class Piece {
     private CouleurJoueur couleur;
     private Coordonnees coordonnees;
 
+    public boolean isDejaDeplace() {
+        return dejaDeplace;
+    }
+
+    public void setDejaDeplace(boolean dejaDeplace) {
+        this.dejaDeplace = dejaDeplace;
+    }
+
+    private boolean dejaDeplace = false;
+
     public Piece() {}
     public Piece(CouleurJoueur couleur, Coordonnees coordonnees) {
         this.couleur = couleur;
