@@ -1,38 +1,46 @@
 package Modele.Piece;
 
 import Controleur.Visiteur.Visiteur;
+import Erreur.DeplacementImpossible;
 import Modele.Coordonnees;
+import Modele.CouleurJoueur;
 
 /**
  * Created by Paul on 16/10/2014.
  */
 public abstract class Piece {
-    /* VRAI si cette pièce est blanche ; FAUX si elle est noire */
-    private boolean blanc;
+
+    public CouleurJoueur getCouleur() {
+        return couleur;
+    }
+
+    public void setCouleur(CouleurJoueur couleur) {
+        this.couleur = couleur;
+    }
+
+    private CouleurJoueur couleur;
     private Coordonnees coordonnees;
 
     public Piece() {}
-    public Piece(boolean blanc, Coordonnees coordonnees) {
-        this.blanc = blanc;
+    public Piece(CouleurJoueur couleur, Coordonnees coordonnees) {
+        this.couleur = couleur;
         this.coordonnees = coordonnees;
     }
 
     public boolean isBlanc() {
-        return blanc;
+        return couleur == CouleurJoueur.BLANC;
     }
 
     public Coordonnees getCoordonnees() {
         return coordonnees;
     }
 
-    public void setBlanc(boolean blanc) {
-        this.blanc = blanc;
-    }
+
 
     public void setCoordonnees(Coordonnees coordonnees) {
         this.coordonnees = coordonnees;
     }
 
-    abstract public void applique(Visiteur v);
+    abstract public void applique(Visiteur v) throws DeplacementImpossible;
 }
 

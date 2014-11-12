@@ -12,6 +12,12 @@ import Modele.Piece.*;
 public class Deplacer implements Visiteur {
     Coordonnees nouvelleCoordonnees;
 
+    public boolean isMiseEnEcheque() {
+        return miseEnEcheque;
+    }
+
+    private boolean miseEnEcheque = false;
+
     public Deplacer(Coordonnees nouvellePosition) throws HorsDeLechiquier {
         //verification que la nouvelle coordonnée est sur l'echiquier
         if (!Jeu.instance().verifCase(nouvellePosition.getX(), nouvellePosition.getY()))
@@ -85,6 +91,34 @@ public class Deplacer implements Visiteur {
         }
 
         //le déplacement est possible en theorie
+
+        //on creer une copie de l'echiquier pour verifier si c'est possible de faire le deplacement
+        Piece[][] tmpEchiquier = Jeu.instance().getEchiquier().clone();
+
+        //on sauvegarde les coordonnées
+        Coordonnees ancienne = tour.getCoordonnees();
+
+        //on modifit les coordonnées
+        tour.setCoordonnees(nouvelleCoordonnees);
+        tmpEchiquier[tour.getCoordonnees().getX()][tour.getCoordonnees().getY()] = tour;
+
+        //on verifit que le verif echec fonctionne
+        //si il ne fonctionne pas on remet les ancienne coordonner dans la piece et on leve une exception
+        if(!Jeu.instance().verificationEchec(tmpEchiquier)){
+            tour.setCoordonnees(ancienne);
+            throw new DeplacementImpossible("Vous vous mettez en echec");
+        }
+
+        //dans le cas ou tout va bien on garde le nouvelle echiqier
+        Jeu.instance().setEchiquier(tmpEchiquier);
+
+        //on met a jour le tour
+        Jeu.instance().tourSuivant();
+
+        //on lance la verification pour voir si on met en echeque l'adversaire
+        miseEnEcheque = Jeu.instance().verificationEchec();
+
+        //on met à jour la vue
 
 
 
