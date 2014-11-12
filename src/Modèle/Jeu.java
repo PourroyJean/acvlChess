@@ -231,6 +231,10 @@ public class Jeu {
     }
 
 
+    public Piece getPiece(Coordonnee c){
+        return echiquier[c.getX()][c.getY()];
+    }
+
 
     public static Jeu instance() {
         return jeu;
