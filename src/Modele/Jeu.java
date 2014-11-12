@@ -27,6 +27,23 @@ public class Jeu {
     public  boolean verificationEchec (){
         return verifLigne(this.echiquier) && verifDiagonale(this.echiquier) && verifCavalier(this.echiquier);
     }
+
+    public Piece getRoiBlanc() {
+        return roiBlanc;
+    }
+
+    public void setRoiBlanc(Piece roiBlanc) {
+        this.roiBlanc = roiBlanc;
+    }
+
+    public Piece getRoiNoir() {
+        return roiNoir;
+    }
+
+    public void setRoiNoir(Piece roiNoir) {
+        this.roiNoir = roiNoir;
+    }
+
     public  boolean verificationEchec (Piece[][] echiquier){
             return verifLigne(echiquier) && verifDiagonale(echiquier) && verifCavalier(echiquier);
     }
