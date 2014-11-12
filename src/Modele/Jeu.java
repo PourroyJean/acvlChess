@@ -49,19 +49,13 @@ public class Jeu extends Sujet {
         return verifLigne(this.echiquier) && verifDiagonale(this.echiquier) && verifCavalier(this.echiquier);
     }
 
-    public Piece getRoiBlanc() {
-        return roiBlanc;
-    }
 
-    public void setRoiBlanc(Piece roiBlanc) {
+    public void setRoiBlanc(Roi roiBlanc) {
         this.roiBlanc = roiBlanc;
     }
 
-    public Piece getRoiNoir() {
-        return roiNoir;
-    }
 
-    public void setRoiNoir(Piece roiNoir) {
+    public void setRoiNoir(Roi roiNoir) {
         this.roiNoir = roiNoir;
     }
 
