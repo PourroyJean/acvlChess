@@ -365,4 +365,9 @@ public class DeplacementsPossibles implements  Visiteur{
     public void visite(Reine reine) throws NotYetImplementedException {
         throw new NotYetImplementedException();
     }
+
+
+    public Vector<Coordonnees> getDeplacementsPossibles() {
+        return deplacementsPossibles;
+    }
 }

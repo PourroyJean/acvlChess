@@ -1,8 +1,6 @@
 package Modele;
 
 import Erreur.NotYetImplementedException;
-import vue.Observateur;
-import Modele.*;
 import Modele.Piece.*;
 
 /**
@@ -52,6 +50,10 @@ public class Jeu extends Sujet {
         tour = (tour == CouleurJoueur.BLANC) ? CouleurJoueur.NOIR : CouleurJoueur.BLANC;
     }
 
+
+    public CouleurJoueur getTour() {
+        return tour;
+    }
 
     //Singleton
     private Jeu() {
@@ -292,37 +294,37 @@ public class Jeu extends Sujet {
         //Creation echiquier
         echiquier = new Piece[8][8];
         // BLANCS - Reine/Roi
-        echiquier[0][3] = new Reine(CouleurJoueur.BLANC, new Coordonnees(0, 3));
-        roiBlanc = new Roi(CouleurJoueur.BLANC, new Coordonnees(0, 4));
-        echiquier[0][4] = roiBlanc;
+        echiquier[3][0] = new Reine(CouleurJoueur.BLANC, new Coordonnees(3,0));
+        roiBlanc = new Roi(CouleurJoueur.BLANC, new Coordonnees(4,0));
+        echiquier[4][0] = roiBlanc;
         //fous
-        echiquier[0][5] = new Fou(CouleurJoueur.BLANC, new Coordonnees(0, 5));
-        echiquier[0][2] = new Fou(CouleurJoueur.BLANC, new Coordonnees(0, 2));
+        echiquier[5][0] = new Fou(CouleurJoueur.BLANC, new Coordonnees(5, 0));
+        echiquier[2][0] = new Fou(CouleurJoueur.BLANC, new Coordonnees(2, 0));
         //cavaliers
-        echiquier[0][6] = new Cavalier(CouleurJoueur.BLANC, new Coordonnees(0, 6));
-        echiquier[0][1] = new Cavalier(CouleurJoueur.BLANC, new Coordonnees(0, 1));
+        echiquier[6][0] = new Cavalier(CouleurJoueur.BLANC, new Coordonnees(6, 0));
+        echiquier[1][0] = new Cavalier(CouleurJoueur.BLANC, new Coordonnees(1, 0));
         //tours
         echiquier[0][0] = new Tour(CouleurJoueur.BLANC, new Coordonnees(0, 0));
-        echiquier[0][7] = new Tour(CouleurJoueur.BLANC, new Coordonnees(0, 7));
+        echiquier[7][0] = new Tour(CouleurJoueur.BLANC, new Coordonnees(7, 0));
 
         // NOIRS - Reine/Roi
-        echiquier[7][3] = new Reine(CouleurJoueur.NOIR, new Coordonnees(7, 3));
-        roiNoir = new Roi(CouleurJoueur.NOIR, new Coordonnees(7, 4));
-        echiquier[7][4] = roiNoir;
+        echiquier[3][7] = new Reine(CouleurJoueur.NOIR, new Coordonnees(3, 7));
+        roiNoir = new Roi(CouleurJoueur.NOIR, new Coordonnees(4, 7));
+        echiquier[4][7] = roiNoir;
         //fous
-        echiquier[7][2] = new Fou(CouleurJoueur.NOIR, new Coordonnees(7, 2));
-        echiquier[7][5] = new Fou(CouleurJoueur.NOIR, new Coordonnees(7, 5));
+        echiquier[2][7] = new Fou(CouleurJoueur.NOIR, new Coordonnees(2, 7));
+        echiquier[5][7] = new Fou(CouleurJoueur.NOIR, new Coordonnees(5, 7));
         //cavaliers
-        echiquier[7][6] = new Cavalier(CouleurJoueur.NOIR, new Coordonnees(7, 6));
-        echiquier[7][1] = new Cavalier(CouleurJoueur.NOIR, new Coordonnees(7, 1));
+        echiquier[6][7] = new Cavalier(CouleurJoueur.NOIR, new Coordonnees(6, 7));
+        echiquier[1][7] = new Cavalier(CouleurJoueur.NOIR, new Coordonnees(1, 7));
         //tours
-        echiquier[7][0] = new Tour(CouleurJoueur.NOIR, new Coordonnees(7, 0));
+        echiquier[0][7] = new Tour(CouleurJoueur.NOIR, new Coordonnees(0, 7));
         echiquier[7][7] = new Tour(CouleurJoueur.NOIR, new Coordonnees(7, 7));
 
         //PIONS
         for (int i = 0; i < 8; i++) {
-            echiquier[1][i] = new Pion(CouleurJoueur.BLANC, new Coordonnees(i, 1));
-            echiquier[6][i] = new Pion(CouleurJoueur.NOIR, new Coordonnees(i, 6));
+            echiquier[i][1] = new Pion(CouleurJoueur.BLANC, new Coordonnees(i, 1));
+            echiquier[i][6] = new Pion(CouleurJoueur.NOIR, new Coordonnees(i, 6));
         }
     }
 
@@ -333,4 +335,5 @@ public class Jeu extends Sujet {
     public void setEchiquier(Piece[][] echiquier) {
         this.echiquier = echiquier;
     }
+
 }
