@@ -14,30 +14,43 @@ public class Jeu extends Sujet {
     private Piece[][] echiquier;
     private Joueur jBlanc;
     private Joueur jNoir;
+    private CouleurJoueur tour = CouleurJoueur.BLANC;
+
+    final private static Jeu jeu = new Jeu();
+    private static boolean BLANC = true;
+    private static boolean NOIR = false;
+
+    private Roi roiBlanc;
+    private Roi roiNoir;
+
+    public Pion getPriseEnPassant() {
+        return priseEnPassant;
+    }
+
+    public void setPriseEnPassant(Pion priseEnPassant) {
+        this.priseEnPassant = priseEnPassant;
+    }
+
+    //Dernier pion deplacé de deux cases (pour la prise en passant)
+    private Pion priseEnPassant = null;
+
 
     public Roi getRoiBlanc() {
         return roiBlanc;
     }
 
-    private Roi roiBlanc;
+
 
     public Roi getRoiNoir() {
         return roiNoir;
     }
 
-    private Roi roiNoir;
 
 
-    public void tourSuivant()
-    {
+
+    public void tourSuivant() {
         tour = (tour == CouleurJoueur.BLANC) ? CouleurJoueur.NOIR : CouleurJoueur.BLANC;
     }
-
-    private CouleurJoueur tour = CouleurJoueur.BLANC;
-
-    final private static Jeu jeu = new Jeu();
-    private static boolean BLANC = true;
-    private static boolean NOIR  = false;
 
 
     //Singleton
@@ -45,7 +58,7 @@ public class Jeu extends Sujet {
     }
 
 
-    public  boolean verificationEchec (){
+    public boolean verificationEchec() {
         return verifLigne(this.echiquier) && verifDiagonale(this.echiquier) && verifCavalier(this.echiquier);
     }
 
@@ -59,18 +72,18 @@ public class Jeu extends Sujet {
         this.roiNoir = roiNoir;
     }
 
-    public  boolean verificationEchec (Piece[][] echiquier){
-            return verifLigne(echiquier) && verifDiagonale(echiquier) && verifCavalier(echiquier);
+    public boolean verificationEchec(Piece[][] echiquier) {
+        return verifLigne(echiquier) && verifDiagonale(echiquier) && verifCavalier(echiquier);
     }
 
-    public static boolean verifCase(int x, int y){
-        if(x > 7 || y > 7 || x < 0 || y < 0){
+    public static boolean verifCase(int x, int y) {
+        if (x > 7 || y > 7 || x < 0 || y < 0) {
             return false;
         }
         return true;
     }
 
-    public boolean verifLigne(Piece[][] echiquier){
+    public boolean verifLigne(Piece[][] echiquier) {
         Piece p = null;
         int xRoi = (tour == CouleurJoueur.BLANC) ? roiBlanc.getCoordonnees().getX() : roiNoir.getCoordonnees().getX();
         int yRoi = (tour == CouleurJoueur.BLANC) ? roiBlanc.getCoordonnees().getY() : roiNoir.getCoordonnees().getY();
@@ -78,14 +91,13 @@ public class Jeu extends Sujet {
         //Vers le haut
         int x = xRoi;
         int y = yRoi + 1;
-        while (verifCase(x, y)){
+        while (verifCase(x, y)) {
             p = echiquier[x][y];
-            if(p != null){
-                if( (p instanceof Tour || p instanceof Reine) && p.getCouleur() != tour) {
+            if (p != null) {
+                if ((p instanceof Tour || p instanceof Reine) && p.getCouleur() != tour) {
                     return false;
                 }
-            }
-            else
+            } else
                 break;
             y++;
         }
@@ -94,14 +106,13 @@ public class Jeu extends Sujet {
         //Vers le bas
         x = xRoi;
         y = yRoi - 1;
-        while (verifCase(x, y)){
+        while (verifCase(x, y)) {
             p = echiquier[x][y];
-            if(p != null){
-                if( (p instanceof Tour || p instanceof Reine) && p.getCouleur() != tour) {
+            if (p != null) {
+                if ((p instanceof Tour || p instanceof Reine) && p.getCouleur() != tour) {
                     return false;
                 }
-            }
-            else
+            } else
                 break;
             y--;
         }
@@ -110,15 +121,14 @@ public class Jeu extends Sujet {
         //Vers la gauche
         x = xRoi - 1;
         y = yRoi;
-        while (verifCase(x, y)){
+        while (verifCase(x, y)) {
             p = echiquier[x][y];
-            if(p != null){
-                if( (p instanceof Tour || p instanceof Reine) && p.getCouleur() != tour) {
+            if (p != null) {
+                if ((p instanceof Tour || p instanceof Reine) && p.getCouleur() != tour) {
                     return false;
                 }
 
-            }
-            else
+            } else
                 break;
             x--;
         }
@@ -126,19 +136,16 @@ public class Jeu extends Sujet {
         //Vers la droite
         x = xRoi + 1;
         y = yRoi;
-        while (verifCase(x, y)){
+        while (verifCase(x, y)) {
             p = echiquier[x][y];
-            if(p != null){
-                if( (p instanceof Tour || p instanceof Reine) && p.getCouleur() != tour) {
+            if (p != null) {
+                if ((p instanceof Tour || p instanceof Reine) && p.getCouleur() != tour) {
                     return false;
                 }
-            }
-            else
+            } else
                 break;
             x++;
         }
-
-
 
 
         return true;
@@ -146,33 +153,33 @@ public class Jeu extends Sujet {
 
     private boolean verifCavalier(Piece[][] echiquier) {
         Piece p = null;
-        int x = (tour ==CouleurJoueur.BLANC) ? roiBlanc.getCoordonnees().getX() : roiNoir.getCoordonnees().getX();
-        int y = ((tour ==CouleurJoueur.BLANC) ? roiBlanc.getCoordonnees().getY() : roiNoir.getCoordonnees().getY());
+        int x = (tour == CouleurJoueur.BLANC) ? roiBlanc.getCoordonnees().getX() : roiNoir.getCoordonnees().getX();
+        int y = ((tour == CouleurJoueur.BLANC) ? roiBlanc.getCoordonnees().getY() : roiNoir.getCoordonnees().getY());
 
         //la case existe + c'est un cavalier  + couleur adverse
 
-        if(verifCase(x+1, y+2) && echiquier[x+1][y+2] instanceof Cavalier && echiquier [x+1][y+2].getCouleur() != tour){
+        if (verifCase(x + 1, y + 2) && echiquier[x + 1][y + 2] instanceof Cavalier && echiquier[x + 1][y + 2].getCouleur() != tour) {
             return false;
         }
-        if(verifCase(x-1, y+2) && echiquier[x-1][y+2] instanceof Cavalier && echiquier [x-1][y+2].getCouleur() != tour){
+        if (verifCase(x - 1, y + 2) && echiquier[x - 1][y + 2] instanceof Cavalier && echiquier[x - 1][y + 2].getCouleur() != tour) {
             return false;
         }
-        if(verifCase(x+1, y-2) && echiquier[x+1][y-2] instanceof Cavalier && echiquier [x+1][y-2].getCouleur() != tour){
+        if (verifCase(x + 1, y - 2) && echiquier[x + 1][y - 2] instanceof Cavalier && echiquier[x + 1][y - 2].getCouleur() != tour) {
             return false;
         }
-        if(verifCase(x-1, y-2) && echiquier[x-1][y-2] instanceof Cavalier && echiquier [x-1][y-2].getCouleur() != tour){
+        if (verifCase(x - 1, y - 2) && echiquier[x - 1][y - 2] instanceof Cavalier && echiquier[x - 1][y - 2].getCouleur() != tour) {
             return false;
         }
-        if(verifCase(x+2, y+1) && echiquier[x+2][y+1] instanceof Cavalier && echiquier [x+2][y+1].getCouleur() != tour){
+        if (verifCase(x + 2, y + 1) && echiquier[x + 2][y + 1] instanceof Cavalier && echiquier[x + 2][y + 1].getCouleur() != tour) {
             return false;
         }
-        if(verifCase(x-2, y+1) && echiquier[x-2][y+1] instanceof Cavalier && echiquier [x-2][y+1].getCouleur() != tour){
+        if (verifCase(x - 2, y + 1) && echiquier[x - 2][y + 1] instanceof Cavalier && echiquier[x - 2][y + 1].getCouleur() != tour) {
             return false;
         }
-        if(verifCase(x+2, y-1) && echiquier[x+2][y-1] instanceof Cavalier && echiquier [x+2][y-1].getCouleur() != tour){
+        if (verifCase(x + 2, y - 1) && echiquier[x + 2][y - 1] instanceof Cavalier && echiquier[x + 2][y - 1].getCouleur() != tour) {
             return false;
         }
-        if(verifCase(x-2, y-1) && echiquier[x-2][y-1] instanceof Cavalier && echiquier [x-2][y-1].getCouleur() != tour){
+        if (verifCase(x - 2, y - 1) && echiquier[x - 2][y - 1] instanceof Cavalier && echiquier[x - 2][y - 1].getCouleur() != tour) {
             return false;
         }
 
@@ -181,23 +188,22 @@ public class Jeu extends Sujet {
 
     private boolean verifDiagonale(Piece[][] echiquier) {
         Piece p = null;
-        int xRoi = (tour ==CouleurJoueur.BLANC) ? roiBlanc.getCoordonnees().getX() : roiNoir.getCoordonnees().getX();
-        int yRoi = ((tour ==CouleurJoueur.BLANC) ? roiBlanc.getCoordonnees().getY() : roiNoir.getCoordonnees().getY());
+        int xRoi = (tour == CouleurJoueur.BLANC) ? roiBlanc.getCoordonnees().getX() : roiNoir.getCoordonnees().getX();
+        int yRoi = ((tour == CouleurJoueur.BLANC) ? roiBlanc.getCoordonnees().getY() : roiNoir.getCoordonnees().getY());
 
         //Vers le haut-droit
         int x = xRoi + 1;
         int y = yRoi + 1;
-        while (verifCase(x, y)){
+        while (verifCase(x, y)) {
             p = echiquier[x][y];
-            if(p != null){
-                if( (p instanceof Fou || p instanceof Reine) && p.getCouleur() != tour) {
+            if (p != null) {
+                if ((p instanceof Fou || p instanceof Reine) && p.getCouleur() != tour) {
                     return false;
                 }
-                if((x == xRoi +1) && (p instanceof Pion) && p.getCouleur() != tour) {
+                if ((x == xRoi + 1) && (p instanceof Pion) && p.getCouleur() != tour) {
                     return false;
                 }
-            }
-            else
+            } else
                 break;
             y++;
             x++;
@@ -207,17 +213,16 @@ public class Jeu extends Sujet {
         //Vers le bas-droit
         x = xRoi + 1;
         y = yRoi - 1;
-        while (verifCase(x, y)){
+        while (verifCase(x, y)) {
             p = echiquier[x][y];
-            if(p != null){
-                if( (p instanceof Fou || p instanceof Reine) && p.getCouleur() != tour) {
+            if (p != null) {
+                if ((p instanceof Fou || p instanceof Reine) && p.getCouleur() != tour) {
                     return false;
                 }
-                if((x == xRoi +1) && (p instanceof Pion) && p.getCouleur() != tour) {
+                if ((x == xRoi + 1) && (p instanceof Pion) && p.getCouleur() != tour) {
                     return false;
                 }
-            }
-            else
+            } else
                 break;
             x++;
             y--;
@@ -227,17 +232,16 @@ public class Jeu extends Sujet {
         //Vers le haut-gauche
         x = xRoi - 1;
         y = yRoi + 1;
-        while (verifCase(x, y)){
+        while (verifCase(x, y)) {
             p = echiquier[x][y];
-            if(p != null){
-                if( (p instanceof Tour || p instanceof Reine) && p.getCouleur() != tour) {
+            if (p != null) {
+                if ((p instanceof Tour || p instanceof Reine) && p.getCouleur() != tour) {
                     return false;
                 }
-                if((x == xRoi - 1) && (p instanceof Pion) && p.getCouleur() != tour) {
+                if ((x == xRoi - 1) && (p instanceof Pion) && p.getCouleur() != tour) {
                     return false;
                 }
-            }
-            else
+            } else
                 break;
             x--;
             y++;
@@ -246,17 +250,16 @@ public class Jeu extends Sujet {
         //Vers le bas-gauche
         x = xRoi - 1;
         y = yRoi - 1;
-        while (verifCase(x, y)){
+        while (verifCase(x, y)) {
             p = echiquier[x][y];
-            if(p != null){
-                if( (p instanceof Tour || p instanceof Reine) && p.getCouleur() != tour) {
+            if (p != null) {
+                if ((p instanceof Tour || p instanceof Reine) && p.getCouleur() != tour) {
                     return false;
                 }
-                if((x == xRoi - 1) && (p instanceof Pion) && p.getCouleur() != tour) {
+                if ((x == xRoi - 1) && (p instanceof Pion) && p.getCouleur() != tour) {
                     return false;
                 }
-            }
-            else
+            } else
                 break;
             x--;
             y--;
@@ -266,7 +269,7 @@ public class Jeu extends Sujet {
     }
 
 
-    public Piece getPiece(Coordonnees c){
+    public Piece getPiece(Coordonnees c) {
         return echiquier[c.getX()][c.getY()];
     }
 
@@ -283,47 +286,47 @@ public class Jeu extends Sujet {
 
 
         //Création des 2 joueurs
-        jBlanc   = blanc;
-        jNoir    = noir;
+        jBlanc = blanc;
+        jNoir = noir;
 
         //Creation echiquier
         echiquier = new Piece[8][8];
         // BLANCS - Reine/Roi
-        echiquier[0][3] =  new Reine(CouleurJoueur.BLANC, new Coordonnees(0,3));
-        roiBlanc = new Roi(CouleurJoueur.BLANC, new Coordonnees(0,4));
-        echiquier[0][4] =  roiBlanc;
+        echiquier[0][3] = new Reine(CouleurJoueur.BLANC, new Coordonnees(0, 3));
+        roiBlanc = new Roi(CouleurJoueur.BLANC, new Coordonnees(0, 4));
+        echiquier[0][4] = roiBlanc;
         //fous
-        echiquier[0][5] =  new Fou(CouleurJoueur.BLANC, new Coordonnees(0,5));
-        echiquier[0][2] =  new Fou(CouleurJoueur.BLANC, new Coordonnees(0,2));
+        echiquier[0][5] = new Fou(CouleurJoueur.BLANC, new Coordonnees(0, 5));
+        echiquier[0][2] = new Fou(CouleurJoueur.BLANC, new Coordonnees(0, 2));
         //cavaliers
-        echiquier[0][6] =  new Cavalier(CouleurJoueur.BLANC, new Coordonnees(0,6));
-        echiquier[0][1] =  new Cavalier(CouleurJoueur.BLANC, new Coordonnees(0,1));
+        echiquier[0][6] = new Cavalier(CouleurJoueur.BLANC, new Coordonnees(0, 6));
+        echiquier[0][1] = new Cavalier(CouleurJoueur.BLANC, new Coordonnees(0, 1));
         //tours
-        echiquier[0][0] =  new Tour(CouleurJoueur.BLANC, new Coordonnees(0,0));
-        echiquier[0][7] =  new Tour	(CouleurJoueur.BLANC, new Coordonnees(0,7));
+        echiquier[0][0] = new Tour(CouleurJoueur.BLANC, new Coordonnees(0, 0));
+        echiquier[0][7] = new Tour(CouleurJoueur.BLANC, new Coordonnees(0, 7));
 
         // NOIRS - Reine/Roi
-        echiquier[7][3] =  new Reine	(CouleurJoueur.NOIR, new Coordonnees(7,3));
-        roiNoir = new Roi (CouleurJoueur.NOIR, new Coordonnees(7,4));
-        echiquier[7][4] =  roiNoir;
+        echiquier[7][3] = new Reine(CouleurJoueur.NOIR, new Coordonnees(7, 3));
+        roiNoir = new Roi(CouleurJoueur.NOIR, new Coordonnees(7, 4));
+        echiquier[7][4] = roiNoir;
         //fous
-        echiquier[7][2] =  new Fou(CouleurJoueur.NOIR, new Coordonnees(7,2));
-        echiquier[7][5] =  new Fou(CouleurJoueur.NOIR, new Coordonnees(7,5));
+        echiquier[7][2] = new Fou(CouleurJoueur.NOIR, new Coordonnees(7, 2));
+        echiquier[7][5] = new Fou(CouleurJoueur.NOIR, new Coordonnees(7, 5));
         //cavaliers
-        echiquier[7][6] =  new Cavalier(CouleurJoueur.NOIR, new Coordonnees(7,6));
-        echiquier[7][1] =  new Cavalier(CouleurJoueur.NOIR, new Coordonnees(7,1));
+        echiquier[7][6] = new Cavalier(CouleurJoueur.NOIR, new Coordonnees(7, 6));
+        echiquier[7][1] = new Cavalier(CouleurJoueur.NOIR, new Coordonnees(7, 1));
         //tours
-        echiquier[7][0] =  new Tour	(CouleurJoueur.NOIR, new Coordonnees(7,0));
-        echiquier[7][7] =  new Tour	(CouleurJoueur.NOIR, new Coordonnees(7,7));
+        echiquier[7][0] = new Tour(CouleurJoueur.NOIR, new Coordonnees(7, 0));
+        echiquier[7][7] = new Tour(CouleurJoueur.NOIR, new Coordonnees(7, 7));
 
         //PIONS
-        for(int i=0; i<8; i++) {
+        for (int i = 0; i < 8; i++) {
             echiquier[1][i] = new Pion(CouleurJoueur.BLANC, new Coordonnees(i, 1));
             echiquier[6][i] = new Pion(CouleurJoueur.NOIR, new Coordonnees(i, 6));
         }
     }
 
-    public static String parseNomPiece(String str){
+    public static String parseNomPiece(String str) {
         return str.split("\\.")[2];
     }
 

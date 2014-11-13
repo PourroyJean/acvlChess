@@ -60,6 +60,9 @@ public class Deplacer implements Visiteur {
         //on lance la verification pour voir si on met en echeque l'adversaire
         miseEnEcheque = Jeu.instance().verificationEchec();
 
+
+        //on met a jour le dernier pion deplacer de deux cases
+        Jeu.instance().setPriseEnPassant(null);
         //on met à jour la vue
 
     }
@@ -93,6 +96,9 @@ public class Deplacer implements Visiteur {
             //on lance la verification pour voir si on met en echeque l'adversaire
             miseEnEcheque = Jeu.instance().verificationEchec();
 
+            //on met a jour le dernier pion deplacer de deux cases
+            Jeu.instance().setPriseEnPassant(null);
+
             //on met à jour la vue
 
             //fin de la fonction
@@ -115,6 +121,9 @@ public class Deplacer implements Visiteur {
 
         //on lance la verification pour voir si on met en echeque l'adversaire
         miseEnEcheque = Jeu.instance().verificationEchec();
+
+        //on met a jour le dernier pion deplacer de deux cases
+        Jeu.instance().setPriseEnPassant(null);
 
         //on met à jour la vue
 
