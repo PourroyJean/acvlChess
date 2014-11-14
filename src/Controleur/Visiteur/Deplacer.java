@@ -29,7 +29,21 @@ public class Deplacer implements Visiteur {
 
     @Override
     public void visite(Pion pion) throws NotYetImplementedException {
-        throw new NotYetImplementedException();
+        //2cas suivant la couleur du joueur
+        if(pion.isBlanc())
+        {
+            //cas de la prise en passant
+            if(pion.getCoordonnees().getY() == 4 && Jeu.instance().getPriseEnPassant() != null &&
+            //le pion qui a été jouer est a coté de notre pion
+                    (Math.abs(Jeu.instance().getPriseEnPassant().getCoordonnees().getX() - pion.getCoordonnees().getX())==1))
+            {
+
+            }
+        }
+        else
+        {
+
+        }
     }
 
     @Override
@@ -159,6 +173,9 @@ public class Deplacer implements Visiteur {
 
         //on lance la verification pour voir si on met en echeque l'adversaire
         miseEnEcheque = Jeu.instance().verificationEchec();
+
+        //on met a jour le dernier pion deplacer de deux cases
+        Jeu.instance().setPriseEnPassant(null);
 
         //on met à jour la vue
     }
