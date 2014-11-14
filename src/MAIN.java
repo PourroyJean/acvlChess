@@ -11,6 +11,7 @@ public class MAIN {
         Jeu j = Jeu.instance();
         j.init(new Joueur("Jean"), new Joueur("Paul"));
         FrameJeu f = FrameJeu.instance();
+        j.attache(f);
 
     }
 }

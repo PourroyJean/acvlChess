@@ -2,20 +2,19 @@ package vue.IHM;
 
 import Controleur.Visiteur.DeplacementsPossibles;
 import Controleur.Visiteur.Deplacer;
-import Controleur.Visiteur.Visiteur;
 import Erreur.DeplacementImpossible;
 import Erreur.HorsDeLechiquier;
 import Erreur.NotYetImplementedException;
 import Modele.Coordonnees;
-import Modele.Coordonnees;
 import Modele.CouleurJoueur;
 import Modele.Jeu;
 import Modele.Piece.Piece;
+import vue.Commande;
+import vue.NouvellePartie;
 import vue.Observateur;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -93,6 +92,7 @@ public class FrameJeu extends JFrame implements Observateur {
     private JButton xButton60;
     private JButton xButton61;
     private JPanel boutonPanel;
+    private JButton xButtonNewGame;
 
 
     //Couleur des cases : color1 etant habituellement Noir
@@ -106,7 +106,7 @@ public class FrameJeu extends JFrame implements Observateur {
 
     private Coordonnees selection = new Coordonnees(OUT,OUT); // case selectionnee
 
-    ActionListener listener;
+    ActionListener listenerCase;
 
     //Singleton
     public static FrameJeu frameJeu = new FrameJeu();
@@ -132,7 +132,7 @@ public class FrameJeu extends JFrame implements Observateur {
     }
 
     private void configurerBoutons() {
-        listener = new ActionListener() {
+        listenerCase = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 clickCase(Integer.parseInt((((JButton) e.getSource()).getToolTipText()).charAt(0) + ""), Integer.parseInt((((JButton) e.getSource()).getToolTipText()).charAt(1) + ""));
@@ -154,7 +154,7 @@ public class FrameJeu extends JFrame implements Observateur {
                 b.setContentAreaFilled(false);
                 b.setFocusPainted(false);
                 //Comportement lors d'un click
-                b.addActionListener(listener);
+                b.addActionListener(listenerCase);
                 boutons[i][j].setOpaque(true);
 
                 if(j == 0 | j == 1 | j == 6 | j == 7) {
@@ -185,9 +185,19 @@ public class FrameJeu extends JFrame implements Observateur {
     private void configurerGUI() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(boutonPanel);
-        setSize(640, 662);
+        setSize(640, 715);
         setResizable(false);
         setVisible(true);
+
+        //La barre de menu
+        setJMenuBar(new MenuBar());
+        xButtonNewGame.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Commande c = new NouvellePartie();
+                c.execute();
+            }
+        });
 
     }
 
@@ -365,6 +375,7 @@ public class FrameJeu extends JFrame implements Observateur {
     @Override
     public void MAJ() throws NotYetImplementedException {
         majEchiquier ();
+        System.out.println("MAJ");
     }
 
     //Place les pieces sur la GUi en fonction du modele
@@ -373,11 +384,16 @@ public class FrameJeu extends JFrame implements Observateur {
             for(int j = 0; j < 8; ++j){
                 String path = "";
                 try {
-
                     path = cheminImage((Jeu.instance().getEchiquier()[i][j]));
-                    boutons[i][j].setIcon(new ImageIcon(ImageIO.read(new File(path))));
+                    if(path != "") {
+                        boutons[i][j].setIcon(new ImageIcon(ImageIO.read(new File(path))));
+                    }
+                    else {
+                        System.out.println("ok");
+                        boutons[i][j].setIcon(null);
+                    }
                 } catch (IOException e) {
-                    System.out.println(path);
+                    System.out.println("Chemin : >" + path + "<");
                     e.printStackTrace();
                 }
             }

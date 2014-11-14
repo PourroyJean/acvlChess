@@ -1,6 +1,7 @@
 package Modele.Piece;
 
 import Controleur.Visiteur.Visiteur;
+import Erreur.DeplacementImpossible;
 import Erreur.NotYetImplementedException;
 import Modele.Coordonnees;
 import Modele.CouleurJoueur;
@@ -16,7 +17,11 @@ public class Pion extends Piece {
     @Override
     public void applique(Visiteur v) {
         try {
-            v.visite(this);
+            try {
+                v.visite(this);
+            } catch (DeplacementImpossible deplacementImpossible) {
+                deplacementImpossible.printStackTrace();
+            }
         } catch (NotYetImplementedException e) {
             e.printStackTrace();
         }

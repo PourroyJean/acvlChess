@@ -2,6 +2,7 @@ package Modele;
 
 import Erreur.NotYetImplementedException;
 import Modele.Piece.*;
+import vue.IHM.FrameJeu;
 
 /**
  * Created by Paul on 19/10/2014.
@@ -287,9 +288,13 @@ public class Jeu extends Sujet {
     public void init(Joueur blanc, Joueur noir) throws NotYetImplementedException {
 
 
+        //Les blancs commencent
+        tour = CouleurJoueur.BLANC;
+
         //Création des 2 joueurs
         jBlanc = blanc;
         jNoir = noir;
+
 
         //Creation echiquier
         echiquier = new Piece[8][8];

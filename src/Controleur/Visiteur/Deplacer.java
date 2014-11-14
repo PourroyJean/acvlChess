@@ -79,11 +79,13 @@ public class Deplacer implements Visiteur {
 
         //on lance la verification pour voir si on met en echeque l'adversaire
         miseEnEcheque = Jeu.instance().verificationEchec();
+
+        Jeu.instance().informe();
     }
 
     @Override
     public void visite(Cavalier cavalier) throws NotYetImplementedException, DeplacementImpossible {
-        throw new NotYetImplementedException();
+        
         ////on verifie que le deplacement est bien autorisé pour le cavalier
         if(Math.abs(nouvelleCoordonnees.getX()-cavalier.getCoordonnees().getX()) == 2) {
             if(Math.abs(nouvelleCoordonnees.getY()-cavalier.getCoordonnees().getY()) != 1)
@@ -111,7 +113,10 @@ public class Deplacer implements Visiteur {
 
         //on met a jour le dernier pion deplacer de deux cases
         Jeu.instance().setPriseEnPassant(null);
-        //on met à jour la vue
+
+        //On informe les observateurs que le modele est modifié
+        Jeu.instance().informe();
+
     }
 
     @Override
@@ -122,7 +127,7 @@ public class Deplacer implements Visiteur {
 
         //on verifit qu'il n'y a pas un de nos pion sur la case cible
         if (Jeu.instance().getPiece(nouvelleCoordonnees) != null && Jeu.instance().getPiece(nouvelleCoordonnees).isBlanc() == fou.isBlanc())
-            throw new DeplacementImpossible("Une de nos pièces est sur la case cible");
+            throw new DeplacementImpossible("Une de nos pièce est sur la case cible");
 
         //on verifit qu'il n'y a rien sur le chemin du deplacement
         if(! ligneLibre(fou.getCoordonnees(), nouvelleCoordonnees))
@@ -141,6 +146,9 @@ public class Deplacer implements Visiteur {
         //on met a jour le dernier pion deplacer de deux cases
         Jeu.instance().setPriseEnPassant(null);
         //on met à jour la vue
+
+        //On informe les observateurs que le modele est modifié
+        Jeu.instance().informe();
 
     }
 
@@ -202,7 +210,9 @@ public class Deplacer implements Visiteur {
         //on met a jour le dernier pion deplacer de deux cases
         Jeu.instance().setPriseEnPassant(null);
 
-        //on met à jour la vue
+        //On informe les observateurs que le modele est modifié
+        Jeu.instance().informe();
+
 
     }
 
@@ -236,7 +246,10 @@ public class Deplacer implements Visiteur {
 
         //on met a jour le dernier pion deplacer de deux cases
         Jeu.instance().setPriseEnPassant(null);
-        //on met à jour la vue
+
+        //On informe les observateurs que le modele est modifié
+        Jeu.instance().informe();
+
 
     }
 
@@ -267,7 +280,9 @@ public class Deplacer implements Visiteur {
         //on met a jour le dernier pion deplacer de deux cases
         Jeu.instance().setPriseEnPassant(null);
 
-        //on met à jour la vue
+
+        //On informe les observateurs que le modele est modifié
+        Jeu.instance().informe();
     }
 
     private boolean ligneLibre(Coordonnees c1, Coordonnees c2){
@@ -381,5 +396,9 @@ public class Deplacer implements Visiteur {
         p.setDejaDeplace(true);
         //dans le cas ou tout va bien on garde le nouvelle echiqier
         Jeu.instance().setEchiquier(tmpEchiquier);
+        //On a deplace la piece, elle n'est plus a son ancienne position
+        Jeu.instance().getEchiquier()[ancienne.getX()][ancienne.getY()] = null;
+
+
     }
 }
