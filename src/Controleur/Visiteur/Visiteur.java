@@ -9,7 +9,7 @@ import Modele.Piece.*;
  */
 public interface Visiteur {
     public void visite(Pion pion) throws NotYetImplementedException;
-    public void visite(Cavalier cavalier) throws NotYetImplementedException;
+    public void visite(Cavalier cavalier) throws NotYetImplementedException, DeplacementImpossible;
     public void visite(Fou fou) throws NotYetImplementedException, DeplacementImpossible;
     public void visite(Tour tour) throws NotYetImplementedException, DeplacementImpossible;
     public void visite(Roi roi) throws NotYetImplementedException;

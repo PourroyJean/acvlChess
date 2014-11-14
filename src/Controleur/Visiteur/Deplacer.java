@@ -47,8 +47,36 @@ public class Deplacer implements Visiteur {
     }
 
     @Override
-    public void visite(Cavalier cavalier) throws NotYetImplementedException {
+    public void visite(Cavalier cavalier) throws NotYetImplementedException, DeplacementImpossible {
         throw new NotYetImplementedException();
+        ////on verifie que le deplacement est bien autorisé pour le cavalier
+        if(Math.abs(nouvelleCoordonnees.getX()-cavalier.getCoordonnees().getX()) == 2) {
+            if(Math.abs(nouvelleCoordonnees.getY()-cavalier.getCoordonnees().getY()) != 1)
+                throw new DeplacementImpossible("Ceci n'est pas un déplacement autorisé pour le cavalier");
+        } else if(Math.abs(nouvelleCoordonnees.getY()-cavalier.getCoordonnees().getY()) == 2) {
+            if(Math.abs(nouvelleCoordonnees.getX()-cavalier.getCoordonnees().getX()) != 1)
+                throw new DeplacementImpossible("Ceci n'est pas un déplacement autorisé pour le cavalier");
+        } else {
+            throw new DeplacementImpossible("Ceci n'est pas un déplacement autorisé pour le cavalier");
+        }
+
+        //on verifie qu'il n'y a pas une de nos pièces sur la case cible
+        if (Jeu.instance().getPiece(nouvelleCoordonnees) != null && Jeu.instance().getPiece(nouvelleCoordonnees).isBlanc() == cavalier.isBlanc())
+            throw new DeplacementImpossible("Une de nos pièces est sur la case cible");
+
+        //le déplacement est possible en theorie
+        DeplacementPiece(cavalier, nouvelleCoordonnees);
+
+        //on met a jour le tour
+        Jeu.instance().tourSuivant();
+
+        //on lance la verification pour voir si on met en echeque l'adversaire
+        miseEnEcheque = Jeu.instance().verificationEchec();
+
+
+        //on met a jour le dernier pion deplacer de deux cases
+        Jeu.instance().setPriseEnPassant(null);
+        //on met à jour la vue
     }
 
     @Override
@@ -59,7 +87,7 @@ public class Deplacer implements Visiteur {
 
         //on verifit qu'il n'y a pas un de nos pion sur la case cible
         if (Jeu.instance().getPiece(nouvelleCoordonnees) != null && Jeu.instance().getPiece(nouvelleCoordonnees).isBlanc() == fou.isBlanc())
-            throw new DeplacementImpossible("Une de nos pièce est sur la case cible");
+            throw new DeplacementImpossible("Une de nos pièces est sur la case cible");
 
         //on verifit qu'il n'y a rien sur le chemin du deplacement
         if(! ligneLibre(fou.getCoordonnees(), nouvelleCoordonnees))
@@ -140,8 +168,6 @@ public class Deplacer implements Visiteur {
         Jeu.instance().setPriseEnPassant(null);
 
         //on met à jour la vue
-
-
 
     }
 
