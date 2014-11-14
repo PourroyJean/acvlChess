@@ -6,6 +6,8 @@ import Modele.Coordonnees;
 import Modele.Jeu;
 import Modele.Piece.*;
 
+import java.util.Vector;
+
 
 /**
  * Created by Paul on 06/11/2014.
@@ -28,9 +30,9 @@ public class Deplacer implements Visiteur {
     }
 
     @Override
-    public void visite(Pion pion) throws NotYetImplementedException {
+    public void visite(Pion pion) throws NotYetImplementedException, DeplacementImpossible {
         //2cas suivant la couleur du joueur
-        if(pion.isBlanc())
+        /*if(pion.isBlanc())
         {
             //cas de la prise en passant
             if(pion.getCoordonnees().getY() == 4 && Jeu.instance().getPriseEnPassant() != null &&
@@ -39,11 +41,44 @@ public class Deplacer implements Visiteur {
             {
 
             }
+            //déplacement
+            else if((nouvelleCoordonnees.getX() == pion.getCoordonnees().getX()) &&
+                ((pion.isDejaDeplace() == false && nouvelleCoordonnees.getY() == 4))
+                || nouvelleCoordonnees.getY() == pion.getCoordonnees().getY()+1)
+            {
+                //on verifit que la case est vide
+                if(Jeu.instance().getPiece(nouvelleCoordonnees) != null)
+                    throw  new DeplacementImpossible("Il y a une pièce sur la cible");
+            }
+            //capture
+            else if()
+
+            else {
+                throw  new DeplacementImpossible();
+            }
+
+
         }
         else
         {
 
-        }
+
+        }*/
+
+        DeplacementsPossibles dp = new DeplacementsPossibles();
+        dp.visite(pion);
+        if(!(dp.getDeplacementsPossibles().contains(nouvelleCoordonnees)))
+            throw  new DeplacementImpossible();
+
+
+        //le déplacement est possible en theorie
+        DeplacementPiece(pion, nouvelleCoordonnees);
+
+        //on met a jour le tour
+        Jeu.instance().tourSuivant();
+
+        //on lance la verification pour voir si on met en echeque l'adversaire
+        miseEnEcheque = Jeu.instance().verificationEchec();
     }
 
     @Override

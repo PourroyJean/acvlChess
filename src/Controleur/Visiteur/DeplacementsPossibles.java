@@ -191,7 +191,7 @@ public class DeplacementsPossibles implements  Visiteur{
     }
 
     @Override
-    public void visite(Tour tour) throws NotYetImplementedException {
+    public void visite(Tour tour){
 
         Piece[][] echiquier = Jeu.instance().getEchiquier();
         Piece p;
