@@ -207,8 +207,37 @@ public class Deplacer implements Visiteur {
     }
 
     @Override
-    public void visite(Roi roi) throws NotYetImplementedException {
-        throw new NotYetImplementedException();
+    public void visite(Roi roi) throws NotYetImplementedException, DeplacementImpossible {
+        //on verifie que le déplacement est bien autorisé pour le roi
+        //ROQUE!
+        if(Math.abs(nouvelleCoordonnees.getX()-roi.getCoordonnees().getX()) == 1
+                || Math.abs(nouvelleCoordonnees.getY()-roi.getCoordonnees().getY()) == 1) {
+            if(Math.abs(nouvelleCoordonnees.getX()-roi.getCoordonnees().getX()) > 1
+                    || Math.abs(nouvelleCoordonnees.getY()-roi.getCoordonnees().getY()) > 1) {
+                throw new DeplacementImpossible("Ceci n'est pas un déplacement autorisé pour le Roi");
+            }
+        } else {
+            throw new DeplacementImpossible("Ceci n'est pas un déplacement autorisé pour le Roi");
+        }
+
+        //on verifie qu'il n'y a pas un de nos pion sur la case cible
+        if (Jeu.instance().getPiece(nouvelleCoordonnees) != null && Jeu.instance().getPiece(nouvelleCoordonnees).isBlanc() == roi.isBlanc())
+            throw new DeplacementImpossible("Une de nos pièces est sur la case cible");
+
+        //le déplacement est possible en theorie
+        DeplacementPiece(roi, nouvelleCoordonnees);
+
+        //on met a jour le tour
+        Jeu.instance().tourSuivant();
+
+        //on lance la verification pour voir si on met en echeque l'adversaire
+        miseEnEcheque = Jeu.instance().verificationEchec();
+
+
+        //on met a jour le dernier pion deplacer de deux cases
+        Jeu.instance().setPriseEnPassant(null);
+        //on met à jour la vue
+
     }
 
     @Override
