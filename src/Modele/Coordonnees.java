@@ -13,6 +13,12 @@ public class Coordonnees {
         this.y = y;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        Coordonnees c = (Coordonnees) obj;
+        return this.x == c.x && this.y == c.y;
+    }
+
     public String toString() {
         return position_letters[x]+""+y;
     }
