@@ -16,10 +16,5 @@ public class NouvellePartie implements Commande {
         } catch (NotYetImplementedException e) {
             e.printStackTrace();
         }
-        /*try {
-            //FrameJeu.instance().MAJ();
-        } catch (NotYetImplementedException e) {
-            e.printStackTrace();
-        }*/
     }
 }

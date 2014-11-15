@@ -28,7 +28,6 @@ public abstract class Sujet {
                 o.MAJ();
             } catch (NotYetImplementedException e) {
                 e.printStackTrace();
-
             }
         }
     }
