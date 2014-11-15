@@ -247,6 +247,7 @@ public class FrameJeu extends JFrame implements Observateur {
             }
 
             resetSelection();
+            return;
         }
 
 
