@@ -6,6 +6,8 @@ import Modele.Coordonnees;
 import Modele.Jeu;
 import Modele.Piece.*;
 
+import java.util.Vector;
+
 
 /**
  * Created by Paul on 06/11/2014.
@@ -28,13 +30,93 @@ public class Deplacer implements Visiteur {
     }
 
     @Override
-    public void visite(Pion pion) throws NotYetImplementedException {
-        throw new NotYetImplementedException();
+    public void visite(Pion pion) throws NotYetImplementedException, DeplacementImpossible {
+        //2cas suivant la couleur du joueur
+        /*if(pion.isBlanc())
+        {
+            //cas de la prise en passant
+            if(pion.getCoordonnees().getY() == 4 && Jeu.instance().getPriseEnPassant() != null &&
+            //le pion qui a été jouer est a coté de notre pion
+                    (Math.abs(Jeu.instance().getPriseEnPassant().getCoordonnees().getX() - pion.getCoordonnees().getX())==1))
+            {
+
+            }
+            //déplacement
+            else if((nouvelleCoordonnees.getX() == pion.getCoordonnees().getX()) &&
+                ((pion.isDejaDeplace() == false && nouvelleCoordonnees.getY() == 4))
+                || nouvelleCoordonnees.getY() == pion.getCoordonnees().getY()+1)
+            {
+                //on verifit que la case est vide
+                if(Jeu.instance().getPiece(nouvelleCoordonnees) != null)
+                    throw  new DeplacementImpossible("Il y a une pièce sur la cible");
+            }
+            //capture
+            else if()
+
+            else {
+                throw  new DeplacementImpossible();
+            }
+
+
+        }
+        else
+        {
+
+
+        }*/
+
+        DeplacementsPossibles dp = new DeplacementsPossibles();
+        dp.visite(pion);
+        if(!(dp.getDeplacementsPossibles().contains(nouvelleCoordonnees)))
+            throw  new DeplacementImpossible();
+
+
+        //le déplacement est possible en theorie
+        DeplacementPiece(pion, nouvelleCoordonnees);
+
+        //on met a jour le tour
+        Jeu.instance().tourSuivant();
+
+        //on lance la verification pour voir si on met en echeque l'adversaire
+        miseEnEcheque = Jeu.instance().verificationEchec();
+
+        Jeu.instance().informe();
     }
 
     @Override
-    public void visite(Cavalier cavalier) throws NotYetImplementedException {
-        throw new NotYetImplementedException();
+    public void visite(Cavalier cavalier) throws NotYetImplementedException, DeplacementImpossible {
+        
+        ////on verifie que le deplacement est bien autorisé pour le cavalier
+        if(Math.abs(nouvelleCoordonnees.getX()-cavalier.getCoordonnees().getX()) == 2) {
+            if(Math.abs(nouvelleCoordonnees.getY()-cavalier.getCoordonnees().getY()) != 1)
+                throw new DeplacementImpossible("Ceci n'est pas un déplacement autorisé pour le cavalier");
+        } else if(Math.abs(nouvelleCoordonnees.getY()-cavalier.getCoordonnees().getY()) == 2) {
+            if(Math.abs(nouvelleCoordonnees.getX()-cavalier.getCoordonnees().getX()) != 1)
+                throw new DeplacementImpossible("Ceci n'est pas un déplacement autorisé pour le cavalier");
+        } else {
+            throw new DeplacementImpossible("Ceci n'est pas un déplacement autorisé pour le cavalier");
+        }
+
+        //on verifie qu'il n'y a pas une de nos pièces sur la case cible
+        if (Jeu.instance().getPiece(nouvelleCoordonnees) != null && Jeu.instance().getPiece(nouvelleCoordonnees).isBlanc() == cavalier.isBlanc())
+            throw new DeplacementImpossible("Une de nos pièces est sur la case cible");
+
+        //le déplacement est possible en theorie
+        DeplacementPiece(cavalier, nouvelleCoordonnees);
+
+        //on met a jour le tour
+        Jeu.instance().tourSuivant();
+
+        //on lance la verification pour voir si on met en echeque l'adversaire
+        miseEnEcheque = Jeu.instance().verificationEchec();
+
+
+        //on met a jour le dernier pion deplacer de deux cases
+        Jeu.instance().setPriseEnPassant(null);
+
+        //On informe les observateurs que le modele est modifié
+        Jeu.instance().informe();
+
     }
 
     @Override
@@ -64,6 +146,9 @@ public class Deplacer implements Visiteur {
         //on met a jour le dernier pion deplacer de deux cases
         Jeu.instance().setPriseEnPassant(null);
         //on met à jour la vue
+
+        //On informe les observateurs que le modele est modifié
+        Jeu.instance().informe();
 
     }
 
@@ -125,15 +210,47 @@ public class Deplacer implements Visiteur {
         //on met a jour le dernier pion deplacer de deux cases
         Jeu.instance().setPriseEnPassant(null);
 
-        //on met à jour la vue
-
+        //On informe les observateurs que le modele est modifié
+        Jeu.instance().informe();
 
 
     }
 
     @Override
-    public void visite(Roi roi) throws NotYetImplementedException {
-        throw new NotYetImplementedException();
+    public void visite(Roi roi) throws NotYetImplementedException, DeplacementImpossible {
+        //on verifie que le déplacement est bien autorisé pour le roi
+        //ROQUE!
+        if(Math.abs(nouvelleCoordonnees.getX()-roi.getCoordonnees().getX()) == 1
+                || Math.abs(nouvelleCoordonnees.getY()-roi.getCoordonnees().getY()) == 1) {
+            if(Math.abs(nouvelleCoordonnees.getX()-roi.getCoordonnees().getX()) > 1
+                    || Math.abs(nouvelleCoordonnees.getY()-roi.getCoordonnees().getY()) > 1) {
+                throw new DeplacementImpossible("Ceci n'est pas un déplacement autorisé pour le Roi");
+            }
+        } else {
+            throw new DeplacementImpossible("Ceci n'est pas un déplacement autorisé pour le Roi");
+        }
+
+        //on verifie qu'il n'y a pas un de nos pion sur la case cible
+        if (Jeu.instance().getPiece(nouvelleCoordonnees) != null && Jeu.instance().getPiece(nouvelleCoordonnees).isBlanc() == roi.isBlanc())
+            throw new DeplacementImpossible("Une de nos pièces est sur la case cible");
+
+        //le déplacement est possible en theorie
+        DeplacementPiece(roi, nouvelleCoordonnees);
+
+        //on met a jour le tour
+        Jeu.instance().tourSuivant();
+
+        //on lance la verification pour voir si on met en echeque l'adversaire
+        miseEnEcheque = Jeu.instance().verificationEchec();
+
+
+        //on met a jour le dernier pion deplacer de deux cases
+        Jeu.instance().setPriseEnPassant(null);
+
+        //On informe les observateurs que le modele est modifié
+        Jeu.instance().informe();
+
+
     }
 
     @Override
@@ -160,7 +277,12 @@ public class Deplacer implements Visiteur {
         //on lance la verification pour voir si on met en echeque l'adversaire
         miseEnEcheque = Jeu.instance().verificationEchec();
 
-        //on met à jour la vue
+        //on met a jour le dernier pion deplacer de deux cases
+        Jeu.instance().setPriseEnPassant(null);
+
+
+        //On informe les observateurs que le modele est modifié
+        Jeu.instance().informe();
     }
 
     private boolean ligneLibre(Coordonnees c1, Coordonnees c2){
@@ -274,5 +396,9 @@ public class Deplacer implements Visiteur {
         p.setDejaDeplace(true);
         //dans le cas ou tout va bien on garde le nouvelle echiqier
         Jeu.instance().setEchiquier(tmpEchiquier);
+        //On a deplace la piece, elle n'est plus a son ancienne position
+        Jeu.instance().getEchiquier()[ancienne.getX()][ancienne.getY()] = null;
+
+
     }
 }

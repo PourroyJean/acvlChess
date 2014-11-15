@@ -5,7 +5,7 @@ package Erreur;
  */
 public class DeplacementImpossible extends Exception {
         public DeplacementImpossible(String message) {
-            super();
+            super(message);
         }
         public DeplacementImpossible() {
             super();
