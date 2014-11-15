@@ -1,4 +1,4 @@
-package vue.IHM;
+package vue.InterfaceGraphique;
 
 import javax.swing.*;
 

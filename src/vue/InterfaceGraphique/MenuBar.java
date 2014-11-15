@@ -1,7 +1,4 @@
-package vue.IHM;
-
-import vue.Commande;
-import vue.NouvellePartie;
+package vue.InterfaceGraphique;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

@@ -2,23 +2,21 @@ package Modele.Piece;
 
 import Controleur.Visiteur.Visiteur;
 import Erreur.DeplacementImpossible;
-import Modele.Coordonnees;
-import Modele.CouleurJoueur;
 
 /**
  * Created by Paul on 16/10/2014.
  */
 public abstract class Piece {
 
-    public CouleurJoueur getCouleur() {
+    public CouleurPiece getCouleur() {
         return couleur;
     }
 
-    public void setCouleur(CouleurJoueur couleur) {
+    public void setCouleur(CouleurPiece couleur) {
         this.couleur = couleur;
     }
 
-    private CouleurJoueur couleur;
+    private CouleurPiece couleur;
     private Coordonnees coordonnees;
 
     public boolean isDejaDeplace() {
@@ -32,13 +30,13 @@ public abstract class Piece {
     private boolean dejaDeplace = false;
 
     public Piece() {}
-    public Piece(CouleurJoueur couleur, Coordonnees coordonnees) {
+    public Piece(CouleurPiece couleur, Coordonnees coordonnees) {
         this.couleur = couleur;
         this.coordonnees = coordonnees;
     }
 
     public boolean isBlanc() {
-        return couleur == CouleurJoueur.BLANC;
+        return couleur == CouleurPiece.BLANC;
     }
 
     public Coordonnees getCoordonnees() {

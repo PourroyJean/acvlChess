@@ -1,7 +1,7 @@
 package Controleur.Visiteur;
 
 import Erreur.NotYetImplementedException;
-import Modele.Coordonnees;
+import Modele.Piece.Coordonnees;
 import Modele.Jeu;
 import Modele.Piece.*;
 

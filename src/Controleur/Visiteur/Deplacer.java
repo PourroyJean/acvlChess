@@ -2,11 +2,9 @@ package Controleur.Visiteur;
 
 
 import Erreur.*;
-import Modele.Coordonnees;
+import Modele.Piece.Coordonnees;
 import Modele.Jeu;
 import Modele.Piece.*;
-
-import java.util.Vector;
 
 
 /**
