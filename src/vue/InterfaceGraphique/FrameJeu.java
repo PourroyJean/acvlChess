@@ -1,16 +1,14 @@
-package vue.IHM;
+package vue.InterfaceGraphique;
 
 import Controleur.Visiteur.DeplacementsPossibles;
 import Controleur.Visiteur.Deplacer;
 import Erreur.DeplacementImpossible;
 import Erreur.HorsDeLechiquier;
 import Erreur.NotYetImplementedException;
-import Modele.Coordonnees;
-import Modele.CouleurJoueur;
+import Modele.Piece.CouleurPiece;
+import Modele.Piece.Coordonnees;
 import Modele.Jeu;
 import Modele.Piece.Piece;
-import vue.Commande;
-import vue.NouvellePartie;
 import vue.Observateur;
 
 import javax.imageio.ImageIO;
@@ -177,7 +175,7 @@ public class FrameJeu extends JFrame implements Observateur {
         }
         String path = "";
         path = "images/" + Jeu.parseNomPiece(p.getClass().getName());
-        path += p.getCouleur() == CouleurJoueur.BLANC ? "Blanc" : "Noir";
+        path += p.getCouleur() == CouleurPiece.BLANC ? "Blanc" : "Noir";
         path += ".png";
         return path;
     }

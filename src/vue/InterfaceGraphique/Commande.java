@@ -1,4 +1,4 @@
-package vue;
+package vue.InterfaceGraphique;
 
 /**
  * Created by Jean on 13/11/14.

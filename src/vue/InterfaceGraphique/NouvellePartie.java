@@ -1,9 +1,8 @@
-package vue;
+package vue.InterfaceGraphique;
 
 import Erreur.NotYetImplementedException;
 import Modele.Jeu;
 import Modele.Joueur;
-import vue.IHM.FrameJeu;
 
 /**
  * Created by Jean on 13/11/14.
@@ -17,10 +16,5 @@ public class NouvellePartie implements Commande {
         } catch (NotYetImplementedException e) {
             e.printStackTrace();
         }
-        /*try {
-            //FrameJeu.instance().MAJ();
-        } catch (NotYetImplementedException e) {
-            e.printStackTrace();
-        }*/
     }
 }
