@@ -12,6 +12,7 @@ import java.util.Vector;
 /**
  * Created by Paul on 06/11/2014.
  */
+
 public class Deplacer implements Visiteur {
     Coordonnees nouvelleCoordonnees;
 
