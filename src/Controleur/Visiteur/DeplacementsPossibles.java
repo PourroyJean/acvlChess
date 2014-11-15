@@ -31,7 +31,7 @@ public class DeplacementsPossibles implements  Visiteur{
         y = yi + dy;
         if(Jeu.verifCase(x, y) && ((p = echiquier[x][y]) == null)) {
             deplacementsPossibles.add(new Coordonnees(x, y));
-            if(((pion.isBlanc() && yi == 1) || (!pion.isBlanc() && yi == 1)) && Jeu.verifCase(x, y+dy) && ((p = echiquier[x][y]) == null)) {
+            if(((pion.isBlanc() && yi == 1) || (!pion.isBlanc() && yi == 7)) && Jeu.verifCase(x, y+dy) && ((p = echiquier[x][y]) == null)) {
                 deplacementsPossibles.add(new Coordonnees(x, y+dy));
             }
         }
