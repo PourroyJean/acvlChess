@@ -74,14 +74,14 @@ public class DeplacementsPossibles implements  Visiteur{
         }
 
         //Haut-Droit
-        x = xi + 1;
+        x = xi + 2;
         y = yi + 1;
         if(Jeu.verifCase(x, y) && ((p = echiquier[x][y]) == null || p.isBlanc() != cavalier.isBlanc())) {
             deplacementsPossibles.add(new Coordonnees(x, y));
         }
 
         //Haut-Gauche
-        x = xi - 1;
+        x = xi - 2;
         y = yi + 1;
         if(Jeu.verifCase(x, y) && ((p = echiquier[x][y]) == null || p.isBlanc() != cavalier.isBlanc())) {
             deplacementsPossibles.add(new Coordonnees(x, y));
@@ -102,14 +102,14 @@ public class DeplacementsPossibles implements  Visiteur{
         }
 
         //Bas-Droit
-        x = xi + 1;
+        x = xi + 2;
         y = yi - 1;
         if(Jeu.verifCase(x, y) && ((p = echiquier[x][y]) == null || p.isBlanc() != cavalier.isBlanc())) {
             deplacementsPossibles.add(new Coordonnees(x, y));
         }
 
         //Bas-Gauche
-        x = xi - 1;
+        x = xi - 2;
         y = yi - 1;
         if(Jeu.verifCase(x, y) && ((p = echiquier[x][y]) == null || p.isBlanc() != cavalier.isBlanc())) {
             deplacementsPossibles.add(new Coordonnees(x, y));
