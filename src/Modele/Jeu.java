@@ -10,8 +10,28 @@ import Modele.Piece.*;
 // Singleton jeu
 public class Jeu extends Sujet {
     private Piece[][] echiquier;
+
+    public Joueur getjBlanc() {
+        return jBlanc;
+    }
+
+    public void setjBlanc(Joueur jBlanc) {
+        this.jBlanc = jBlanc;
+    }
+
+    public Joueur getjNoir() {
+        return jNoir;
+    }
+
+    public void setjNoir(Joueur jNoir) {
+        this.jNoir = jNoir;
+    }
+
     private Joueur jBlanc;
     private Joueur jNoir;
+
+
+
     private CouleurPiece tour = CouleurPiece.BLANC;
 
     final private static Jeu jeu = new Jeu();
@@ -32,6 +52,9 @@ public class Jeu extends Sujet {
     //Dernier pion deplacé de deux cases (pour la prise en passant)
     private Pion priseEnPassant = null;
 
+    public void setTour(CouleurPiece tour) {
+        this.tour = tour;
+    }
 
     public Roi getRoiBlanc() {
         return roiBlanc;
@@ -282,54 +305,6 @@ public class Jeu extends Sujet {
 
     public Piece[][] getEchiquier() {
         return echiquier;
-    }
-
-    public void init(Joueur blanc, Joueur noir) throws NotYetImplementedException {
-
-
-        //Les blancs commencent
-        tour = CouleurPiece.BLANC;
-
-        //Création des 2 joueurs
-        jBlanc = blanc;
-        jNoir = noir;
-
-
-        //Creation echiquier
-        echiquier = new Piece[8][8];
-        // BLANCS - Reine/Roi
-        echiquier[3][0] = new Reine(CouleurPiece.BLANC, new Coordonnees(3,0));
-        roiBlanc = new Roi(CouleurPiece.BLANC, new Coordonnees(4,0));
-        echiquier[4][0] = roiBlanc;
-        //fous
-        echiquier[5][0] = new Fou(CouleurPiece.BLANC, new Coordonnees(5, 0));
-        echiquier[2][0] = new Fou(CouleurPiece.BLANC, new Coordonnees(2, 0));
-        //cavaliers
-        echiquier[6][0] = new Cavalier(CouleurPiece.BLANC, new Coordonnees(6, 0));
-        echiquier[1][0] = new Cavalier(CouleurPiece.BLANC, new Coordonnees(1, 0));
-        //tours
-        echiquier[0][0] = new Tour(CouleurPiece.BLANC, new Coordonnees(0, 0));
-        echiquier[7][0] = new Tour(CouleurPiece.BLANC, new Coordonnees(7, 0));
-
-        // NOIRS - Reine/Roi
-        echiquier[3][7] = new Reine(CouleurPiece.NOIR, new Coordonnees(3, 7));
-        roiNoir = new Roi(CouleurPiece.NOIR, new Coordonnees(4, 7));
-        echiquier[4][7] = roiNoir;
-        //fous
-        echiquier[2][7] = new Fou(CouleurPiece.NOIR, new Coordonnees(2, 7));
-        echiquier[5][7] = new Fou(CouleurPiece.NOIR, new Coordonnees(5, 7));
-        //cavaliers
-        echiquier[6][7] = new Cavalier(CouleurPiece.NOIR, new Coordonnees(6, 7));
-        echiquier[1][7] = new Cavalier(CouleurPiece.NOIR, new Coordonnees(1, 7));
-        //tours
-        echiquier[0][7] = new Tour(CouleurPiece.NOIR, new Coordonnees(0, 7));
-        echiquier[7][7] = new Tour(CouleurPiece.NOIR, new Coordonnees(7, 7));
-
-        //PIONS
-        for (int i = 0; i < 8; i++) {
-            echiquier[i][1] = new Pion(CouleurPiece.BLANC, new Coordonnees(i, 1));
-            echiquier[i][6] = new Pion(CouleurPiece.NOIR, new Coordonnees(i, 6));
-        }
     }
 
     public static String parseNomPiece(String str) {

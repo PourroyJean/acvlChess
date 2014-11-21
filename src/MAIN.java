@@ -1,3 +1,4 @@
+import Controleur.Visiteur.Partie;
 import Erreur.NotYetImplementedException;
 import Modele.Jeu;
 import Modele.Joueur;
@@ -9,7 +10,7 @@ import Vue.InterfaceGraphique.FrameJeu;
 public class MAIN {
     public static void main(String[] args) throws NotYetImplementedException {
         Jeu j = Jeu.instance();
-        j.init(new Joueur("Jean"), new Joueur("Paul"));
+        Partie.init("Jean","Paul");
         FrameJeu f = FrameJeu.instance();
         j.attache(f);
 
