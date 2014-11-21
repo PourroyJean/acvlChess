@@ -28,6 +28,7 @@ public class Partie {
         //Creation echiquier
         Jeu.instance().setEchiquier(new Piece[8][8]);
 
+
         // BLANCS - Reine/Roi
         Jeu.instance().getEchiquier()[3][0] = new Reine(CouleurPiece.BLANC, new Coordonnees(3,0));
         Jeu.instance().setRoiBlanc( new Roi(CouleurPiece.BLANC, new Coordonnees(4,0)));
