@@ -123,9 +123,10 @@ public class Jeu extends Sujet {
             if (p != null) {
                 if ((p instanceof Tour || p instanceof Reine) && p.getCouleur() != tour) {
                     return false;
+                } else {
+                    break;
                 }
-            } else
-                break;
+            }
             y++;
         }
 
@@ -138,9 +139,10 @@ public class Jeu extends Sujet {
             if (p != null) {
                 if ((p instanceof Tour || p instanceof Reine) && p.getCouleur() != tour) {
                     return false;
+                } else {
+                    break;
                 }
-            } else
-                break;
+            }
             y--;
         }
 
@@ -153,10 +155,10 @@ public class Jeu extends Sujet {
             if (p != null) {
                 if ((p instanceof Tour || p instanceof Reine) && p.getCouleur() != tour) {
                     return false;
+                } else {
+                    break;
                 }
-
-            } else
-                break;
+            }
             x--;
         }
 
@@ -168,9 +170,10 @@ public class Jeu extends Sujet {
             if (p != null) {
                 if ((p instanceof Tour || p instanceof Reine) && p.getCouleur() != tour) {
                     return false;
+                } else {
+                    break;
                 }
-            } else
-                break;
+            }
             x++;
         }
 
@@ -227,11 +230,12 @@ public class Jeu extends Sujet {
                 if ((p instanceof Fou || p instanceof Reine) && p.getCouleur() != tour) {
                     return false;
                 }
-                if ((x == xRoi + 1) && (p instanceof Pion) && p.getCouleur() != tour) {
+                else if ((x == xRoi + 1) && (p instanceof Pion) && p.getCouleur() != tour) {
                     return false;
+                } else {
+                    break;
                 }
-            } else
-                break;
+            }
             y++;
             x++;
         }
@@ -246,11 +250,12 @@ public class Jeu extends Sujet {
                 if ((p instanceof Fou || p instanceof Reine) && p.getCouleur() != tour) {
                     return false;
                 }
-                if ((x == xRoi + 1) && (p instanceof Pion) && p.getCouleur() != tour) {
+                else if ((x == xRoi + 1) && (p instanceof Pion) && p.getCouleur() != tour) {
                     return false;
+                } else {
+                    break;
                 }
-            } else
-                break;
+            }
             x++;
             y--;
         }
@@ -265,11 +270,12 @@ public class Jeu extends Sujet {
                 if ((p instanceof Tour || p instanceof Reine) && p.getCouleur() != tour) {
                     return false;
                 }
-                if ((x == xRoi - 1) && (p instanceof Pion) && p.getCouleur() != tour) {
+                else if ((x == xRoi - 1) && (p instanceof Pion) && p.getCouleur() != tour) {
                     return false;
+                } else {
+                    break;
                 }
-            } else
-                break;
+            }
             x--;
             y++;
         }
@@ -283,11 +289,12 @@ public class Jeu extends Sujet {
                 if ((p instanceof Tour || p instanceof Reine) && p.getCouleur() != tour) {
                     return false;
                 }
-                if ((x == xRoi - 1) && (p instanceof Pion) && p.getCouleur() != tour) {
+                else if ((x == xRoi - 1) && (p instanceof Pion) && p.getCouleur() != tour) {
                     return false;
+                } else {
+                    break;
                 }
-            } else
-                break;
+            }
             x--;
             y--;
         }

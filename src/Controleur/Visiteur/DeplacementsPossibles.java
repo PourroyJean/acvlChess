@@ -504,8 +504,13 @@ public class DeplacementsPossibles implements  Visiteur{
 
     public void addDeplacementPossible(Piece p, Coordonnees c) {
         Coordonnees ancienneCoord = p.getCoordonnees();
+        Piece ancienEch = Jeu.instance().getEchiquier()[c.getX()][c.getY()];
+        Jeu.instance().getEchiquier()[p.getCoordonnees().getX()][p.getCoordonnees().getY()] = null;
+        Jeu.instance().getEchiquier()[c.getX()][c.getY()] = p;
         p.setCoordonnees(c);
         boolean ech = Jeu.instance().verificationEchec();
+        Jeu.instance().getEchiquier()[ancienneCoord.getX()][ancienneCoord.getY()] = p;
+        Jeu.instance().getEchiquier()[c.getX()][c.getY()] = ancienEch;
         p.setCoordonnees(ancienneCoord);
         if(ech)
             deplacementsPossibles.add(c);
