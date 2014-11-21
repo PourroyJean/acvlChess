@@ -1,7 +1,7 @@
 package Modele;
 
 import Erreur.NotYetImplementedException;
-import vue.Observateur;
+import Vue.Observateur;
 
 import java.util.Vector;
 

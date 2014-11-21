@@ -1,4 +1,4 @@
-package vue.InterfaceGraphique;
+package Vue.InterfaceGraphique;
 
 import Erreur.NotYetImplementedException;
 import Modele.Jeu;

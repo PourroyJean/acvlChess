@@ -59,7 +59,7 @@ public class Jeu extends Sujet {
     private Jeu() {
     }
 
-
+    // Returns False if echec
     public boolean verificationEchec() {
         return verifLigne(this.echiquier) && verifDiagonale(this.echiquier) && verifCavalier(this.echiquier);
     }

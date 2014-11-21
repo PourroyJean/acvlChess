@@ -1,7 +1,7 @@
 import Erreur.NotYetImplementedException;
 import Modele.Jeu;
 import Modele.Joueur;
-import vue.InterfaceGraphique.FrameJeu;
+import Vue.InterfaceGraphique.FrameJeu;
 
 /**
  * Created by Jean on 12/11/14.

@@ -1,4 +1,4 @@
-package vue.InterfaceGraphique;
+package Vue.InterfaceGraphique;
 
 import Controleur.Visiteur.DeplacementsPossibles;
 import Controleur.Visiteur.Deplacer;
@@ -9,7 +9,7 @@ import Modele.Piece.CouleurPiece;
 import Modele.Piece.Coordonnees;
 import Modele.Jeu;
 import Modele.Piece.Piece;
-import vue.Observateur;
+import Vue.Observateur;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

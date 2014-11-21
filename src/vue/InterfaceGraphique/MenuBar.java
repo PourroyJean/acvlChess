@@ -1,4 +1,4 @@
-package vue.InterfaceGraphique;
+package Vue.InterfaceGraphique;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
