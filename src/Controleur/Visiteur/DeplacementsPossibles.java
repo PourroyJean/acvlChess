@@ -30,9 +30,9 @@ public class DeplacementsPossibles implements  Visiteur{
         x = xi;
         y = yi + dy;
         if(Jeu.verifCase(x, y) && ((p = echiquier[x][y]) == null)) {
-            deplacementsPossibles.add(new Coordonnees(x, y));
+            addDeplacementPossible(pion, new Coordonnees(x, y));
             if(((pion.isBlanc() && yi == 1) || (!pion.isBlanc() && yi == 6)) && Jeu.verifCase(x, y+dy) && ((p = echiquier[x][y]) == null)) {
-                deplacementsPossibles.add(new Coordonnees(x, y+dy));
+                addDeplacementPossible(pion, new Coordonnees(x, y+dy));
             }
         }
 
@@ -40,14 +40,14 @@ public class DeplacementsPossibles implements  Visiteur{
         x = xi + 1;
         y = yi + dy;
         if(Jeu.verifCase(x, y) && ((p = echiquier[x][y]) != null && p.isBlanc() != pion.isBlanc())) {
-            deplacementsPossibles.add(new Coordonnees(x, y));
+            addDeplacementPossible(pion, new Coordonnees(x, y));
         }
 
         // En avant-gauche
         x = xi - 1;
         y = yi + dy;
         if(Jeu.verifCase(x, y) && ((p = echiquier[x][y]) != null && p.isBlanc() != pion.isBlanc())) {
-            deplacementsPossibles.add(new Coordonnees(x, y));
+            addDeplacementPossible(pion, new Coordonnees(x, y));
         }
     }
 
@@ -63,56 +63,56 @@ public class DeplacementsPossibles implements  Visiteur{
         x = xi + 1;
         y = yi + 2;
         if(Jeu.verifCase(x, y) && ((p = echiquier[x][y]) == null || p.isBlanc() != cavalier.isBlanc())) {
-            deplacementsPossibles.add(new Coordonnees(x, y));
+            addDeplacementPossible(cavalier, new Coordonnees(x, y));
         }
 
         //2Haut-Gauche
         x = xi - 1;
         y = yi + 2;
         if(Jeu.verifCase(x, y) && ((p = echiquier[x][y]) == null || p.isBlanc() != cavalier.isBlanc())) {
-            deplacementsPossibles.add(new Coordonnees(x, y));
+            addDeplacementPossible(cavalier, new Coordonnees(x, y));
         }
 
         //Haut-Droit
         x = xi + 2;
         y = yi + 1;
         if(Jeu.verifCase(x, y) && ((p = echiquier[x][y]) == null || p.isBlanc() != cavalier.isBlanc())) {
-            deplacementsPossibles.add(new Coordonnees(x, y));
+            addDeplacementPossible(cavalier, new Coordonnees(x, y));
         }
 
         //Haut-Gauche
         x = xi - 2;
         y = yi + 1;
         if(Jeu.verifCase(x, y) && ((p = echiquier[x][y]) == null || p.isBlanc() != cavalier.isBlanc())) {
-            deplacementsPossibles.add(new Coordonnees(x, y));
+            addDeplacementPossible(cavalier, new Coordonnees(x, y));
         }
 
         //2Bas-Droit
         x = xi + 1;
         y = yi - 2;
         if(Jeu.verifCase(x, y) && ((p = echiquier[x][y]) == null || p.isBlanc() != cavalier.isBlanc())) {
-            deplacementsPossibles.add(new Coordonnees(x, y));
+            addDeplacementPossible(cavalier, new Coordonnees(x, y));
         }
 
         //2Bas-Gauche
         x = xi - 1;
         y = yi - 2;
         if(Jeu.verifCase(x, y) && ((p = echiquier[x][y]) == null || p.isBlanc() != cavalier.isBlanc())) {
-            deplacementsPossibles.add(new Coordonnees(x, y));
+            addDeplacementPossible(cavalier, new Coordonnees(x, y));
         }
 
         //Bas-Droit
         x = xi + 2;
         y = yi - 1;
         if(Jeu.verifCase(x, y) && ((p = echiquier[x][y]) == null || p.isBlanc() != cavalier.isBlanc())) {
-            deplacementsPossibles.add(new Coordonnees(x, y));
+            addDeplacementPossible(cavalier, new Coordonnees(x, y));
         }
 
         //Bas-Gauche
         x = xi - 2;
         y = yi - 1;
         if(Jeu.verifCase(x, y) && ((p = echiquier[x][y]) == null || p.isBlanc() != cavalier.isBlanc())) {
-            deplacementsPossibles.add(new Coordonnees(x, y));
+            addDeplacementPossible(cavalier, new Coordonnees(x, y));
         }
     }
 
@@ -130,11 +130,11 @@ public class DeplacementsPossibles implements  Visiteur{
         while(Jeu.verifCase(x, y)) {
             if((p = echiquier[x][y]) != null) {
                 if(p.isBlanc() != fou.isBlanc()) {
-                    deplacementsPossibles.add(p.getCoordonnees());
+                    addDeplacementPossible(fou, p.getCoordonnees());
                 }
                 break;
             } else {
-                deplacementsPossibles.add(new Coordonnees(x, y));
+                addDeplacementPossible(fou, new Coordonnees(x, y));
             }
             y++;
             x++;
@@ -147,11 +147,11 @@ public class DeplacementsPossibles implements  Visiteur{
         while(Jeu.verifCase(x, y)) {
             if((p = echiquier[x][y]) != null) {
                 if(p.isBlanc() != fou.isBlanc()) {
-                    deplacementsPossibles.add(p.getCoordonnees());
+                    addDeplacementPossible(fou, p.getCoordonnees());
                 }
                 break;
             } else {
-                deplacementsPossibles.add(new Coordonnees(x, y));
+                addDeplacementPossible(fou, new Coordonnees(x, y));
             }
             y++;
             x--;
@@ -163,11 +163,11 @@ public class DeplacementsPossibles implements  Visiteur{
         while(Jeu.verifCase(x, y)) {
             if((p = echiquier[x][y]) != null) {
                 if(p.isBlanc() != fou.isBlanc()) {
-                    deplacementsPossibles.add(p.getCoordonnees());
+                    addDeplacementPossible(fou, p.getCoordonnees());
                 }
                 break;
             } else {
-                deplacementsPossibles.add(new Coordonnees(x, y));
+                addDeplacementPossible(fou, new Coordonnees(x, y));
             }
             y--;
             x++;
@@ -179,11 +179,11 @@ public class DeplacementsPossibles implements  Visiteur{
         while(Jeu.verifCase(x, y)) {
             if((p = echiquier[x][y]) != null) {
                 if(p.isBlanc() != fou.isBlanc()) {
-                    deplacementsPossibles.add(p.getCoordonnees());
+                    addDeplacementPossible(fou, p.getCoordonnees());
                 }
                 break;
             } else {
-                deplacementsPossibles.add(new Coordonnees(x, y));
+                addDeplacementPossible(fou, new Coordonnees(x, y));
             }
             y--;
             x--;
@@ -204,11 +204,11 @@ public class DeplacementsPossibles implements  Visiteur{
         while(Jeu.verifCase(x, y)) {
             if((p = echiquier[x][y]) != null) {
                 if(p.isBlanc() != tour.isBlanc()) {
-                    deplacementsPossibles.add(p.getCoordonnees());
+                    addDeplacementPossible(tour, p.getCoordonnees());
                 }
                 break;
             } else {
-                deplacementsPossibles.add(new Coordonnees(x, y));
+                addDeplacementPossible(tour, new Coordonnees(x, y));
             }
             y++;
         }
@@ -220,11 +220,11 @@ public class DeplacementsPossibles implements  Visiteur{
         while(Jeu.verifCase(x, y)) {
             if((p = echiquier[x][y]) != null) {
                 if(p.isBlanc() != tour.isBlanc()) {
-                    deplacementsPossibles.add(p.getCoordonnees());
+                    addDeplacementPossible(tour, p.getCoordonnees());
                 }
                 break;
             } else {
-                deplacementsPossibles.add(new Coordonnees(x, y));
+                addDeplacementPossible(tour, new Coordonnees(x, y));
             }
             y--;
         }
@@ -235,11 +235,11 @@ public class DeplacementsPossibles implements  Visiteur{
         while(Jeu.verifCase(x, y)) {
             if((p = echiquier[x][y]) != null) {
                 if(p.isBlanc() != tour.isBlanc()) {
-                    deplacementsPossibles.add(p.getCoordonnees());
+                    addDeplacementPossible(tour, p.getCoordonnees());
                 }
                 break;
             } else {
-                deplacementsPossibles.add(new Coordonnees(x, y));
+                addDeplacementPossible(tour, new Coordonnees(x, y));
             }
             x++;
         }
@@ -250,11 +250,11 @@ public class DeplacementsPossibles implements  Visiteur{
         while(Jeu.verifCase(x, y)) {
             if((p = echiquier[x][y]) != null) {
                 if(p.isBlanc() != tour.isBlanc()) {
-                    deplacementsPossibles.add(p.getCoordonnees());
+                    addDeplacementPossible(tour, p.getCoordonnees());
                 }
                 break;
             } else {
-                deplacementsPossibles.add(new Coordonnees(x, y));
+                addDeplacementPossible(tour, new Coordonnees(x, y));
             }
             x--;
         }
@@ -277,7 +277,7 @@ public class DeplacementsPossibles implements  Visiteur{
             tmp = new Coordonnees(x, y);
             roi.setCoordonnees(tmp);
             if(Jeu.instance().verificationEchec()) {
-                deplacementsPossibles.add(tmp);
+                addDeplacementPossible(roi, tmp);
             }
         }
 
@@ -288,7 +288,7 @@ public class DeplacementsPossibles implements  Visiteur{
             tmp = new Coordonnees(x, y);
             roi.setCoordonnees(tmp);
             if(Jeu.instance().verificationEchec()) {
-                deplacementsPossibles.add(tmp);
+                addDeplacementPossible(roi, tmp);
             }
         }
 
@@ -299,7 +299,7 @@ public class DeplacementsPossibles implements  Visiteur{
             tmp = new Coordonnees(x, y);
             roi.setCoordonnees(tmp);
             if(Jeu.instance().verificationEchec()) {
-                deplacementsPossibles.add(tmp);
+                addDeplacementPossible(roi, tmp);
             }
         }
 
@@ -310,7 +310,7 @@ public class DeplacementsPossibles implements  Visiteur{
             tmp = new Coordonnees(x, y);
             roi.setCoordonnees(tmp);
             if(Jeu.instance().verificationEchec()) {
-                deplacementsPossibles.add(tmp);
+                addDeplacementPossible(roi, tmp);
             }
         }
 
@@ -321,7 +321,7 @@ public class DeplacementsPossibles implements  Visiteur{
             tmp = new Coordonnees(x, y);
             roi.setCoordonnees(tmp);
             if(Jeu.instance().verificationEchec()) {
-                deplacementsPossibles.add(tmp);
+                addDeplacementPossible(roi, tmp);
             }
         }
 
@@ -332,29 +332,29 @@ public class DeplacementsPossibles implements  Visiteur{
             tmp = new Coordonnees(x, y);
             roi.setCoordonnees(tmp);
             if(Jeu.instance().verificationEchec()) {
-                deplacementsPossibles.add(tmp);
+                addDeplacementPossible(roi, tmp);
             }
         }
 
         //Bas-Droit
         x = saveX + 1;
         y = saveY - 1;
-        if(Jeu.verifCase(x, y) && ((p=echiquier[x][y]) == null || p.isBlanc() != roi.isBlanc())) {
+        if(Jeu.verifCase(x, y) && (((p = echiquier[x][y]) == null) || (p.isBlanc() != roi.isBlanc()))) {
             tmp = new Coordonnees(x, y);
             roi.setCoordonnees(tmp);
             if(Jeu.instance().verificationEchec()) {
-                deplacementsPossibles.add(tmp);
+                addDeplacementPossible(roi, tmp);
             }
         }
 
         //Bas-Gauche
         x = saveX - 1;
         y = saveY - 1;
-        if(Jeu.verifCase(x, y) && ((p=echiquier[x][y]) == null)) {
+        if(Jeu.verifCase(x, y) && ((echiquier[x][y]) == null)) {
             tmp = new Coordonnees(x, y);
             roi.setCoordonnees(tmp);
             if(Jeu.instance().verificationEchec()) {
-                deplacementsPossibles.add(tmp);
+                addDeplacementPossible(roi, tmp);
             }
         }
 
@@ -376,11 +376,11 @@ public class DeplacementsPossibles implements  Visiteur{
             while (Jeu.verifCase(x, y)) {
                 if ((p = echiquier[x][y]) != null) {
                     if (p.isBlanc() != reine.isBlanc()) {
-                        deplacementsPossibles.add(p.getCoordonnees());
+                        addDeplacementPossible(reine, p.getCoordonnees());
                     }
                     break;
                 } else {
-                    deplacementsPossibles.add(new Coordonnees(x, y));
+                    addDeplacementPossible(reine, new Coordonnees(x, y));
                 }
                 y++;
             }
@@ -392,11 +392,11 @@ public class DeplacementsPossibles implements  Visiteur{
             while (Jeu.verifCase(x, y)) {
                 if ((p = echiquier[x][y]) != null) {
                     if (p.isBlanc() != reine.isBlanc()) {
-                        deplacementsPossibles.add(p.getCoordonnees());
+                        addDeplacementPossible(reine, p.getCoordonnees());
                     }
                     break;
                 } else {
-                    deplacementsPossibles.add(new Coordonnees(x, y));
+                    addDeplacementPossible(reine, new Coordonnees(x, y));
                 }
                 y--;
             }
@@ -407,11 +407,11 @@ public class DeplacementsPossibles implements  Visiteur{
             while (Jeu.verifCase(x, y)) {
                 if ((p = echiquier[x][y]) != null) {
                     if (p.isBlanc() != reine.isBlanc()) {
-                        deplacementsPossibles.add(p.getCoordonnees());
+                        addDeplacementPossible(reine, p.getCoordonnees());
                     }
                     break;
                 } else {
-                    deplacementsPossibles.add(new Coordonnees(x, y));
+                    addDeplacementPossible(reine, new Coordonnees(x, y));
                 }
                 x++;
             }
@@ -422,11 +422,12 @@ public class DeplacementsPossibles implements  Visiteur{
             while (Jeu.verifCase(x, y)) {
                 if ((p = echiquier[x][y]) != null) {
                     if (p.isBlanc() != reine.isBlanc()) {
-                        deplacementsPossibles.add(p.getCoordonnees());
+                        addDeplacementPossible(reine, p.getCoordonnees());
                     }
                     break;
                 } else {
-                    deplacementsPossibles.add(new Coordonnees(x, y));
+                    addDeplacementPossible(reine, new Coordonnees(x, y));
+
                 }
                 x--;
             }
@@ -438,11 +439,12 @@ public class DeplacementsPossibles implements  Visiteur{
         while(Jeu.verifCase(x, y)) {
             if((p = echiquier[x][y]) != null) {
                 if(p.isBlanc() != reine.isBlanc()) {
-                    deplacementsPossibles.add(p.getCoordonnees());
+                    addDeplacementPossible(reine, p.getCoordonnees());
                 }
                 break;
             } else {
-                deplacementsPossibles.add(new Coordonnees(x, y));
+                addDeplacementPossible(reine, new Coordonnees(x, y));
+
             }
             y++;
             x++;
@@ -455,11 +457,11 @@ public class DeplacementsPossibles implements  Visiteur{
         while(Jeu.verifCase(x, y)) {
             if((p = echiquier[x][y]) != null) {
                 if(p.isBlanc() != reine.isBlanc()) {
-                    deplacementsPossibles.add(p.getCoordonnees());
+                    addDeplacementPossible(reine, p.getCoordonnees());
                 }
                 break;
             } else {
-                deplacementsPossibles.add(new Coordonnees(x, y));
+                addDeplacementPossible(reine, new Coordonnees(x, y));
             }
             y++;
             x--;
@@ -471,11 +473,11 @@ public class DeplacementsPossibles implements  Visiteur{
         while(Jeu.verifCase(x, y)) {
             if((p = echiquier[x][y]) != null) {
                 if(p.isBlanc() != reine.isBlanc()) {
-                    deplacementsPossibles.add(p.getCoordonnees());
+                    addDeplacementPossible(reine, p.getCoordonnees());
                 }
                 break;
             } else {
-                deplacementsPossibles.add(new Coordonnees(x, y));
+                addDeplacementPossible(reine, new Coordonnees(x, y));
             }
             y--;
             x++;
@@ -487,11 +489,11 @@ public class DeplacementsPossibles implements  Visiteur{
         while(Jeu.verifCase(x, y)) {
             if((p = echiquier[x][y]) != null) {
                 if(p.isBlanc() != reine.isBlanc()) {
-                    deplacementsPossibles.add(p.getCoordonnees());
+                    addDeplacementPossible(reine, p.getCoordonnees());
                 }
                 break;
             } else {
-                deplacementsPossibles.add(new Coordonnees(x, y));
+                addDeplacementPossible(reine, new Coordonnees(x, y));
             }
             y--;
             x--;
@@ -500,7 +502,14 @@ public class DeplacementsPossibles implements  Visiteur{
 }
 
 
-
+    public void addDeplacementPossible(Piece p, Coordonnees c) {
+        Coordonnees ancienneCoord = p.getCoordonnees();
+        p.setCoordonnees(c);
+        boolean ech = Jeu.instance().verificationEchec();
+        p.setCoordonnees(ancienneCoord);
+        if(ech)
+            deplacementsPossibles.add(c);
+    }
 
     public Vector<Coordonnees> getDeplacementsPossibles() {
         return deplacementsPossibles;

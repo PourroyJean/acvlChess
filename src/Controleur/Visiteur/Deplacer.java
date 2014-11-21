@@ -53,16 +53,12 @@ public class Deplacer implements Visiteur {
     public void visite(Cavalier cavalier) throws NotYetImplementedException, DeplacementImpossible {
 
         DeplacementsPossibles dp = new DeplacementsPossibles();
-        Coordonnees anciennesCoordonnes = cavalier.getCoordonnees();
         dp.visite(cavalier);
         if(!(dp.getDeplacementsPossibles().contains(nouvelleCoordonnees)))
             throw  new DeplacementImpossible();
 
         //le déplacement est possible en theorie
         DeplacementPiece(cavalier, nouvelleCoordonnees);
-        if(!miseEnEcheque) {
-            DeplacementPiece(cavalier, anciennesCoordonnes);
-        }
 
         //on met a jour le tour
         Jeu.instance().tourSuivant();
@@ -83,7 +79,6 @@ public class Deplacer implements Visiteur {
     public void visite(Fou fou) throws NotYetImplementedException, DeplacementImpossible {
 
         DeplacementsPossibles dp = new DeplacementsPossibles();
-        Coordonnees anciennesCoordonnes = fou.getCoordonnees();
         dp.visite(fou);
         if(!(dp.getDeplacementsPossibles().contains(nouvelleCoordonnees)))
             throw  new DeplacementImpossible();
@@ -96,9 +91,6 @@ public class Deplacer implements Visiteur {
 
         //on lance la verification pour voir si on met en echeque l'adversaire
         miseEnEcheque = Jeu.instance().verificationEchec();
-        if(!miseEnEcheque) {
-            DeplacementPiece(fou, anciennesCoordonnes);
-        }
 
 
         //on met a jour le dernier pion deplacer de deux cases
@@ -114,7 +106,6 @@ public class Deplacer implements Visiteur {
     public void visite(Tour tour) throws DeplacementImpossible {
 
         DeplacementsPossibles dp = new DeplacementsPossibles();
-        Coordonnees anciennesCoordonnes = tour.getCoordonnees();
         dp.visite(tour);
         if(!(dp.getDeplacementsPossibles().contains(nouvelleCoordonnees)))
             throw  new DeplacementImpossible();
@@ -127,9 +118,6 @@ public class Deplacer implements Visiteur {
 
         //on lance la verification pour voir si on met en echeque l'adversaire
         miseEnEcheque = Jeu.instance().verificationEchec();
-        if(!miseEnEcheque) {
-            DeplacementPiece(tour, anciennesCoordonnes);
-        }
 
 
         //on met a jour le dernier pion deplacer de deux cases
@@ -144,7 +132,6 @@ public class Deplacer implements Visiteur {
     public void visite(Roi roi) throws NotYetImplementedException, DeplacementImpossible {
 
         DeplacementsPossibles dp = new DeplacementsPossibles();
-        Coordonnees anciennesCoordonnes = roi.getCoordonnees();
         dp.visite(roi);
         if(!(dp.getDeplacementsPossibles().contains(nouvelleCoordonnees)))
             throw  new DeplacementImpossible();
@@ -157,9 +144,6 @@ public class Deplacer implements Visiteur {
 
         //on lance la verification pour voir si on met en echeque l'adversaire
         miseEnEcheque = Jeu.instance().verificationEchec();
-        if(!miseEnEcheque) {
-            DeplacementPiece(roi, anciennesCoordonnes);
-        }
 
 
         //on met a jour le dernier pion deplacer de deux cases
@@ -175,7 +159,6 @@ public class Deplacer implements Visiteur {
     public void visite(Reine reine) throws NotYetImplementedException, DeplacementImpossible {
 
         DeplacementsPossibles dp = new DeplacementsPossibles();
-        Coordonnees anciennesCoordonnes = reine.getCoordonnees();
         dp.visite(reine);
         if(!(dp.getDeplacementsPossibles().contains(nouvelleCoordonnees)))
             throw  new DeplacementImpossible();
@@ -188,9 +171,7 @@ public class Deplacer implements Visiteur {
 
         //on lance la verification pour voir si on met en echeque l'adversaire
         miseEnEcheque = Jeu.instance().verificationEchec();
-        if(!miseEnEcheque) {
-            DeplacementPiece(reine, anciennesCoordonnes);
-        }
+        System.out.println("Mise en echec: "+miseEnEcheque);
 
 
         //on met a jour le dernier pion deplacer de deux cases

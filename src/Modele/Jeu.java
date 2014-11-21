@@ -84,7 +84,9 @@ public class Jeu extends Sujet {
 
     // Returns False if echec
     public boolean verificationEchec() {
-        return verifLigne(this.echiquier) && verifDiagonale(this.echiquier) && verifCavalier(this.echiquier);
+        boolean ech = verifLigne(this.echiquier) && verifDiagonale(this.echiquier) && verifCavalier(this.echiquier);
+        System.out.println("=====================================\nTour "+tour+" Ech "+ech);
+        return ech;
     }
 
 
